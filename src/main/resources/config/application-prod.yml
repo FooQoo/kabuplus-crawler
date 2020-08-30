@@ -1,0 +1,17 @@
+---
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://${MYSQL_HOST}/kabuplus?useJDBCComplaintTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=JST&character_set_server=utf8&characterEncoding=utf8
+    initialization-mode: always
+    username: developer
+    password: ${MYSQL_PASSWORD}
+    type: com.zaxxer.hikari.HikariDataSource
+    hikari:
+      pool-name: kabuplus
+      connection-timeout: 20000
+      minimum-idle: 10
+      maximum-pool-size: 20
+      idle-timeout: 300000
+      max-lifetime: 1200000
+

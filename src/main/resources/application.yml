@@ -1,0 +1,3 @@
+logging.level:
+  fooqoo.trade.stock.repository: debug
+  org.springframework.jdbc.datasource.DataSourceTransactionManager: debug
