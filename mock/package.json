@@ -1,0 +1,14 @@
+{
+  "name": "mock",
+  "version": "1.0.0",
+  "description": "mock api",
+  "main": "index.js",
+  "author": "fooqoo",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.17.1"
+  },
+  "scripts": {
+    "serve": "node index.js"
+  }
+}

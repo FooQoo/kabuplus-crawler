@@ -15,3 +15,13 @@ spring:
       idle-timeout: 300000
       max-lifetime: 1200000
 
+extension:
+  api:
+    kabu-plus:
+      base-url: hoge
+      path: hoge
+      connect-timeout: 1000
+      read-timeout: 1000
+      username: hoge
+      password: hoge
+

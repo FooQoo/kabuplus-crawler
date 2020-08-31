@@ -26,3 +26,6 @@ target/
 /nbdist/
 /.nb-gradle/
 build/
+
+## js
+node_modules

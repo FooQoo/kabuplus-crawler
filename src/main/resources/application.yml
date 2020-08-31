@@ -1,3 +1,10 @@
+spring:
+  batch:
+    initialize-schema: always
+
 logging.level:
   fooqoo.trade.stock.repository: debug
   org.springframework.jdbc.datasource.DataSourceTransactionManager: debug
+
+mybatis:
+  mapper-locations: classpath:fooqoo/trade/stock/crawler/infrastructure/mapper/mysql/*.xml
