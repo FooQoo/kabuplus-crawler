@@ -7,6 +7,7 @@ import java.io.Serializable;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 
+/** DB保存用の銘柄クラス */
 @Value
 @Builder
 public class Price implements Serializable {

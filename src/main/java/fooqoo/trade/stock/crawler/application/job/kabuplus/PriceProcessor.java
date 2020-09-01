@@ -8,6 +8,7 @@ import org.springframework.batch.core.configuration.annotation.StepScope;
 import org.springframework.batch.item.ItemProcessor;
 import org.springframework.stereotype.Component;
 
+/** Spring Batch中間処理 */
 @Component
 @StepScope
 @RequiredArgsConstructor
@@ -16,6 +17,12 @@ public class PriceProcessor implements ItemProcessor<String[], Price> {
 
   private final PriceService priceService;
 
+  /**
+   * 中間処理
+   *
+   * @param price 株+の価格
+   * @return DB保存用インスタンス
+   */
   @Override
   public Price process(final String[] price) {
     return priceService.getPrice(price);

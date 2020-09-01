@@ -11,6 +11,7 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
+/** Priceを扱うServiceクラス */
 @Service
 @RequiredArgsConstructor
 @Slf4j
@@ -19,10 +20,22 @@ public class PriceService {
   private static final String DATE_FORMAT = "yyyy/MM/dd HH:mm";
   private static final String DATE_OF_PRICE_FORMAT = "yyyy/M/d";
 
+  /**
+   * 株+ -> DB要素に変換
+   *
+   * @param price 株+
+   * @return DB
+   */
   public Price getPrice(final String[] price) {
     return convertResponseToPrice(price);
   }
 
+  /**
+   * 行ごとの変換処理
+   *
+   * @param row 株+の銘柄要素
+   * @return DB行要素
+   */
   private Price convertResponseToPrice(final String[] row) {
     if (row.length == PriceConverter.values().length) {
       return Price.builder()
@@ -64,6 +77,13 @@ public class PriceService {
     return Price.builder().build();
   }
 
+  /**
+   * 文字列 -> 日付変換
+   *
+   * @param date 文字列の日付
+   * @param format yyyy/MM/dd HH:mm
+   * @return LocalDateTimeの日付
+   */
   private LocalDate getFormattedDate(final String date, final String format) {
     try {
       return LocalDate.parse(date, DateTimeFormatter.ofPattern(format));
@@ -72,14 +92,32 @@ public class PriceService {
     }
   }
 
+  /**
+   * 文字列 -> Integer変換
+   *
+   * @param number 数値の文字列
+   * @return Integer型の数値
+   */
   private Integer getIntegerFormat(final String number) {
     return isInteger(number) ? Integer.parseInt(number) : null;
   }
 
+  /**
+   * 文字列 -> 小数点型
+   *
+   * @param number 数値の文字列
+   * @return BigDecimal型の数値
+   */
   private BigDecimal getBigDecimalFormat(final String number) {
     return isNumber(number) ? new BigDecimal(number) : null;
   }
 
+  /**
+   * Integer型に変換できるか
+   *
+   * @param number 数値の文字列
+   * @return Integer型に変換できるか
+   */
   private boolean isInteger(final String number) {
     try {
       Integer.parseInt(number);
@@ -89,6 +127,12 @@ public class PriceService {
     }
   }
 
+  /**
+   * Float型に変換できるか
+   *
+   * @param number 数値の文字列
+   * @return Float型に変換できる
+   */
   private boolean isNumber(final String number) {
     try {
       Float.parseFloat(number);

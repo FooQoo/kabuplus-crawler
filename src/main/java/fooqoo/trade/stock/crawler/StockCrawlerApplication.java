@@ -5,6 +5,7 @@ import org.springframework.boot.WebApplicationType;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.context.properties.ConfigurationPropertiesScan;
 
+/** SpringBootApplicationクラス */
 @SpringBootApplication
 @ConfigurationPropertiesScan
 public class StockCrawlerApplication {
