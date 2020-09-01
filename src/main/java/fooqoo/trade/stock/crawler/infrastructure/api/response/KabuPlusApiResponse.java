@@ -8,6 +8,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
+/** 株+のレスポンス */
 @Data
 @RequiredArgsConstructor
 public class KabuPlusApiResponse implements Serializable {
@@ -15,6 +16,7 @@ public class KabuPlusApiResponse implements Serializable {
   @JsonProperty("japan-all-stock-prices-2")
   private final List<String[]> prices;
 
+  /** デフォルトコンストラクタ */
   public KabuPlusApiResponse() {
     this.prices = new ArrayList<>();
   }

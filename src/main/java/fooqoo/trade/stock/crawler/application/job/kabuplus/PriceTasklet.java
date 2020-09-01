@@ -13,6 +13,7 @@ import org.springframework.stereotype.Component;
 import java.util.List;
 import java.util.stream.Collectors;
 
+/** Spring Batch タスクレット */
 @Component
 @RequiredArgsConstructor
 public class PriceTasklet implements Tasklet {
@@ -21,6 +22,14 @@ public class PriceTasklet implements Tasklet {
   private final PriceProcessor processor;
   private final PriceWriter writer;
 
+  /**
+   * タスクレットの実行メソッド
+   *
+   * @param stepContribution StepContributionインスタンス
+   * @param chunkContext ChunkContextインスタンス
+   * @return 実行ステータス
+   * @throws Exception 例外
+   */
   @Override
   public RepeatStatus execute(StepContribution stepContribution, ChunkContext chunkContext)
       throws Exception {

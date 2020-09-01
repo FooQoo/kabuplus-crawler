@@ -12,6 +12,7 @@ import org.springframework.web.client.RestTemplate;
 
 import java.time.Duration;
 
+/** 株+の設定 */
 @ConstructorBinding
 @ConfigurationProperties(prefix = "extension.api.kabu-plus")
 @RequiredArgsConstructor
@@ -31,6 +32,12 @@ public class KabuPlusConfig {
 
   private final String password;
 
+  /**
+   * 株+のRestTemplate取得
+   *
+   * @param restTemplateBuilder RestTemplateBuilderインスタンス
+   * @return RestTemplate
+   */
   @Bean
   public RestTemplate kabuPlusRestTemplate(RestTemplateBuilder restTemplateBuilder) {
     return restTemplateBuilder

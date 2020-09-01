@@ -11,6 +11,7 @@ import org.springframework.stereotype.Repository;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.util.UriComponentsBuilder;
 
+/** KabuPlusApiRepository実装クラス */
 @Repository
 @RequiredArgsConstructor
 public class KabuPlusApiRepositoryImpl implements KabuPlusApiRepository {
@@ -18,6 +19,11 @@ public class KabuPlusApiRepositoryImpl implements KabuPlusApiRepository {
   private final KabuPlusConfig config;
   private final RestTemplate restTemplate;
 
+  /**
+   * 最新の銘柄の価格を取得
+   *
+   * @return 株プラスのレスポンス
+   */
   @Override
   public KabuPlusApiResponse getLatestPrices() {
 
