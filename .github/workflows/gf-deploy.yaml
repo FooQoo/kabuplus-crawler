@@ -28,7 +28,9 @@ jobs:
           java-version: 1.11
 
       - name: Build with Maven
-        run: ./mvnw clean package -DskipTests=true
+        run: |
+          ./mvnw clean package -DskipTests=true
+          rm target/stock-crawler-*-SNAPSHOT.jar
 
       - name: GCP Authenticate
         uses: GoogleCloudPlatform/github-actions/setup-gcloud@master
