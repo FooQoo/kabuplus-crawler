@@ -38,12 +38,16 @@ public class PriceStepConfig {
   /**
    * Jobのbean
    *
-   * @param step Stepインスタンス
+   * @param priceStep Stepインスタンス
    * @return Jobインスタンス
    * @throws Exception Job実行時の例外
    */
   @Bean
-  public Job job(Step step) throws Exception {
-    return jobBuilderFactory.get("job").incrementer(new RunIdIncrementer()).start(step).build();
+  public Job job(Step priceStep) throws Exception {
+    return jobBuilderFactory
+        .get("job")
+        .incrementer(new RunIdIncrementer())
+        .start(priceStep)
+        .build();
   }
 }

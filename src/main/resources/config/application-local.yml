@@ -1,25 +1,23 @@
 ---
 spring:
+  batch:
+    job:
+      enabled: true
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://localhost:3306/kabuplus?allowPublicKeyRetrieval=true&useSSL=false&useUnicode=true&useJDBCComplaintTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=JST&character_set_server=utf8&characterEncoding=utf8
+    url: jdbc:mysql://localhost:3306/kabuplus?useJDBCComplaintTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=JST&character_set_server=utf8&characterEncoding=utf8
     initialization-mode: always
     username: fooqoo
     password: passw0rd
     type: com.zaxxer.hikari.HikariDataSource
     hikari:
       pool-name: kabuplus
-      connection-timeout: 20000
-      minimum-idle: 10
-      maximum-pool-size: 20
-      idle-timeout: 300000
-      max-lifetime: 1200000
 
 extension:
   api:
     kabu-plus:
       base-url: http://localhost:3000
-      path: /mock.json
+      path: /sample.json
       connect-timeout: 1000
       read-timeout: 1000
       username: username
