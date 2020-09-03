@@ -1,6 +1,18 @@
 spring:
+  profiles:
+    active: default
+    include:
+      - prod
   batch:
     initialize-schema: always
+  datasource:
+    hikari:
+      connection-timeout: 20000
+      minimum-idle: 10
+      maximum-pool-size: 20
+      idle-timeout: 20000
+      max-lifetime: 60000
+
 
 logging.level:
   fooqoo.trade.stock.repository: debug

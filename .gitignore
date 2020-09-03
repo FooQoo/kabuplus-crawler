@@ -29,3 +29,7 @@ build/
 
 ## js
 node_modules
+
+## gcp credential
+credentials.json
+env.yaml

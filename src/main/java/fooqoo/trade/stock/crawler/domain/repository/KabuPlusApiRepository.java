@@ -10,5 +10,5 @@ public interface KabuPlusApiRepository {
    *
    * @return 株プラスのAPIレスポンス
    */
-  public KabuPlusApiResponse getLatestPrices();
+  KabuPlusApiResponse getLatestPrices();
 }
