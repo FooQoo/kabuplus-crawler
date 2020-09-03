@@ -3,7 +3,7 @@ name: Google Functions
 on:
   push:
     branches:
-      - feature/#4-add-cicd-test-cicd
+      - develop
 
 env:
   FUNCTION_ENV: ${{ secrets.FUNCTION_ENV }}
@@ -40,7 +40,7 @@ jobs:
           service_account_key: ${{ secrets.GCP_SA_KEY }}
           export_default_credentials: true
 
-      - name: deploy
+      - name: Deploy To Google Functions
         run: |
           echo $FUNCTION_ENV | base64 -d > env.yaml
           gcloud functions deploy stock-crawler --project $GCP_SA_PROJECT_ID --quiet --entry-point=org.springframework.cloud.function.adapter.gcp.GcfJarLauncher --trigger-topic=stock --env-vars-file=env.yaml --source=target --runtime=java11 --memory=512MB --vpc-connector=function2sql --timeout=300
