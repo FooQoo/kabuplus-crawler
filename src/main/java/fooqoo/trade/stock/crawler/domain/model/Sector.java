@@ -3,6 +3,9 @@ package fooqoo.trade.stock.crawler.domain.model;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 
+/**
+ * 業種
+ */
 @RequiredArgsConstructor
 @Getter
 public enum Sector {
