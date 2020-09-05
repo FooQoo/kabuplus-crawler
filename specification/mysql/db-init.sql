@@ -11,7 +11,7 @@ CREATE TABLE price IF NOT EXISTS (
     code int,
     code_name varchar(255),
     market varchar(255),
-    biz_type varchar(255),
+    sector varchar(255),
     crawled_date date,
     price int,
     price_day_over_day int,
