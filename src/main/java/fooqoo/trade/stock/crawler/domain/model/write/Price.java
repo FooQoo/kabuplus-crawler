@@ -22,7 +22,7 @@ public class Price implements Serializable {
   String market;
 
   /** 業種 */
-  String bizType;
+  String sector;
 
   /** 日時 */
   LocalDate crawledDate;

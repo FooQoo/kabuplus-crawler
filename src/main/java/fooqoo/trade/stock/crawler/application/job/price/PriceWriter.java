@@ -1,4 +1,4 @@
-package fooqoo.trade.stock.crawler.application.job.kabuplus;
+package fooqoo.trade.stock.crawler.application.job.price;
 
 import fooqoo.trade.stock.crawler.domain.model.write.Price;
 import org.apache.ibatis.session.SqlSessionFactory;

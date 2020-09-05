@@ -1,7 +1,10 @@
-package fooqoo.trade.stock.crawler.application.job.kabuplus;
+package fooqoo.trade.stock.crawler.application.job.price.tasklet;
 
+import fooqoo.trade.stock.crawler.application.job.price.PriceProcessor;
+import fooqoo.trade.stock.crawler.application.job.price.PriceWriter;
+import fooqoo.trade.stock.crawler.application.service.CloudStorageService;
+import fooqoo.trade.stock.crawler.application.service.PriceFilterService;
 import fooqoo.trade.stock.crawler.domain.model.write.Price;
-import fooqoo.trade.stock.crawler.domain.repository.KabuPlusApiRepository;
 import fooqoo.trade.stock.crawler.infrastructure.api.response.KabuPlusApiResponse;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -12,22 +15,18 @@ import org.springframework.batch.repeat.RepeatStatus;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
-import java.util.concurrent.atomic.AtomicInteger;
 import java.util.stream.Collectors;
-
-import static java.util.stream.Collectors.groupingBy;
 
 /** Spring Batch タスクレット */
 @Slf4j
 @Component
 @RequiredArgsConstructor
-public class PriceTasklet implements Tasklet {
+public class PriceStorageTasklet implements Tasklet {
 
-  private static final int CHUNK_SIZE = 1000;
-
-  private final KabuPlusApiRepository kabuPlusApiRepository;
+  private final CloudStorageService cloudStorageService;
   private final PriceProcessor processor;
   private final PriceWriter writer;
+  private final PriceFilterService priceFilterService;
 
   /**
    * タスクレットの実行メソッド
@@ -38,25 +37,16 @@ public class PriceTasklet implements Tasklet {
    * @throws Exception 例外
    */
   @Override
-  public RepeatStatus execute(StepContribution stepContribution, ChunkContext chunkContext)
-      throws Exception {
+  public RepeatStatus execute(
+      final StepContribution stepContribution, final ChunkContext chunkContext) throws Exception {
 
-    KabuPlusApiResponse response = kabuPlusApiRepository.getLatestPrices();
+    KabuPlusApiResponse response = cloudStorageService.getPrice();
 
     List<Price> priceList =
         response.getPrices().stream().map(processor::process).collect(Collectors.toList());
 
-    AtomicInteger counter = new AtomicInteger();
-
-    // トランザクションが完結してるのでwriter.writeは1回でよい？
-    priceList.stream()
-        .collect(groupingBy(x -> counter.getAndIncrement() / CHUNK_SIZE))
-        .values()
-        .forEach(
-            prices -> {
-              writer.write(prices);
-              log.info("insert price chunk.");
-            });
+    // フィルタリングされた銘柄を保存
+    writer.write(priceList);
 
     log.info("complete insert chunk");
 

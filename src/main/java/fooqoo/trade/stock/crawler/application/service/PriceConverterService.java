@@ -11,11 +11,10 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
-/** Priceを扱うServiceクラス */
+/** Priceに変換するServiceクラス */
 @Service
 @RequiredArgsConstructor
-@Slf4j
-public class PriceService {
+public class PriceConverterService {
 
   private static final String DATE_FORMAT = "yyyy/MM/dd HH:mm";
   private static final String DATE_OF_PRICE_FORMAT = "yyyy/M/d";
@@ -42,7 +41,7 @@ public class PriceService {
           .code(row[PriceConverter.CODE.getIndex()])
           .codeName(row[PriceConverter.NAME.getIndex()])
           .market(row[PriceConverter.MARKET.getIndex()])
-          .bizType(row[PriceConverter.TYPE.getIndex()])
+          .sector(row[PriceConverter.TYPE.getIndex()])
           .crawledDate(getFormattedDate(row[PriceConverter.DATE.getIndex()], DATE_FORMAT))
           .price(getIntegerFormat(row[PriceConverter.PRICE.getIndex()]))
           .priceDayOverDay(getIntegerFormat(row[PriceConverter.PRICE_DAY_OVER_DAY.getIndex()]))

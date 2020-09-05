@@ -1,9 +1,9 @@
 CREATE TABLE IF NOT EXISTS price (
-    code int,
+    code int NOT NULL,
     code_name varchar(255),
     market varchar(255),
-    biz_type varchar(255),
-    crawled_date date,
+    sector varchar(255),
+    crawled_date date NOT NULL,
     price int,
     price_day_over_day int,
     price_day_over_day_percentage decimal(11, 2),
@@ -23,5 +23,6 @@ CREATE TABLE IF NOT EXISTS price (
     rate_of_deviation_of_yearly_high decimal(11, 2),
     date_of_low_price date,
     yearly_low int,
-    rate_of_deviation_of_yearly_low decimal(11, 2)
+    rate_of_deviation_of_yearly_low decimal(11, 2),
+    PRIMARY KEY(code, crawled_date)
 );

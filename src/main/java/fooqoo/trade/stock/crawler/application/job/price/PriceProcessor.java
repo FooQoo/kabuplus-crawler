@@ -1,6 +1,6 @@
-package fooqoo.trade.stock.crawler.application.job.kabuplus;
+package fooqoo.trade.stock.crawler.application.job.price;
 
-import fooqoo.trade.stock.crawler.application.service.PriceService;
+import fooqoo.trade.stock.crawler.application.service.PriceConverterService;
 import fooqoo.trade.stock.crawler.domain.model.write.Price;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -15,7 +15,7 @@ import org.springframework.stereotype.Component;
 @Slf4j
 public class PriceProcessor implements ItemProcessor<String[], Price> {
 
-  private final PriceService priceService;
+  private final PriceConverterService priceConverterService;
 
   /**
    * 中間処理
@@ -25,6 +25,6 @@ public class PriceProcessor implements ItemProcessor<String[], Price> {
    */
   @Override
   public Price process(final String[] price) {
-    return priceService.getPrice(price);
+    return priceConverterService.getPrice(price);
   }
 }

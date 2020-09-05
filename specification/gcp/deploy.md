@@ -19,4 +19,11 @@ $ gcloud functions deploy stock-crawler \
   --env-vars-file=env.yaml \
   --vpc-connector=function2sql \
   --timeout=300
+
+$ gcloud scheduler jobs create pubsub stock \
+   --topic stock \
+   --message-body='fetch info' \
+   --schedule '00 17 * * *' \
+   --time-zone='Asia/Tokyo'
+
 ```
