@@ -1,0 +1,24 @@
+---
+spring:
+  batch:
+    job:
+      enabled: true
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://${MYSQL_HOST}/kabuplus?useJDBCComplaintTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=JST&character_set_server=utf8&characterEncoding=utf8
+    initialization-mode: always
+    username: developer
+    password: ${MYSQL_PASSWORD}
+    type: com.zaxxer.hikari.HikariDataSource
+    hikari:
+      pool-name: kabuplus
+
+extension:
+  api:
+    kabu-plus:
+      base-url: https://csvex.com
+      path: ${KABUPLUS_PATH}
+      connect-timeout: 1000
+      read-timeout: 1000
+      username: ${KABUPLUS_USERNAME}
+      password: ${KABUPLUS_PASSWORD}

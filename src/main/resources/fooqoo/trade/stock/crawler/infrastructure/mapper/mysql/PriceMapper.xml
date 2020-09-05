@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="fooqoo.trade.stock.crawler.infrastructure.mapper.mysql.PriceMapper">
+
+    <resultMap id="Price" type="fooqoo.trade.stock.crawler.domain.model.write.Price">
+        <result property="code" column="code"/>
+        <result property="codeName" column="code_name"/>
+        <result property="market" column="market"/>
+        <result property="sector" column="sector"/>
+        <result property="crawledDate" column="crawled_date"/>
+        <result property="price" column="price"/>
+        <result property="priceDayOverDay" column="price_day_over_day"/>
+        <result property="priceDayOverDayPercentage" column="price_day_over_day_percentage"/>
+        <result property="closed" column="closed"/>
+        <result property="opening" column="opening"/>
+        <result property="high" column="high"/>
+        <result property="low" column="low"/>
+        <result property="vwap" column="vwap"/>
+        <result property="volume" column="volume"/>
+        <result property="volumePercentage" column="volume_percentage"/>
+        <result property="tradingValue" column="trading_value"/>
+        <result property="marketCapitalization" column="market_capitalization"/>
+        <result property="priceLowLimit" column="price_low_limit"/>
+        <result property="priceHighLimit" column="price_high_limit"/>
+        <result property="dateOfHighPrice" column="date_of_high_price"/>
+        <result property="yearlyHigh" column="yearly_high"/>
+        <result property="rateOfDeviationOfYearlyHigh" column="rate_of_deviation_of_yearly_high"/>
+        <result property="dateOfLowPrice" column="date_of_low_price"/>
+        <result property="yearlyLow" column="yearly_low"/>
+        <result property="rateOfDeviationOfYearlyLow" column="rate_of_deviation_of_yearly_low"/>
+    </resultMap>
+
+    <insert id="insertPrice" parameterType="fooqoo.trade.stock.crawler.domain.model.write.Price">
+        INSERT INTO price (
+        code,
+        code_name,
+        market,
+        sector,
+        crawled_date,
+        price,
+        price_day_over_day,
+        price_day_over_day_percentage,
+        closed,
+        opening,
+        high,
+        low,
+        vwap,
+        volume,
+        volume_percentage,
+        trading_value,
+        market_capitalization,
+        price_low_limit,
+        price_high_limit,
+        date_of_high_price,
+        yearly_high,
+        rate_of_deviation_of_yearly_high,
+        date_of_low_price,
+        yearly_low,
+        rate_of_deviation_of_yearly_low
+        ) values (
+        #{code},
+        #{codeName},
+        #{market},
+        #{sector},
+        #{crawledDate},
+        #{price},
+        #{priceDayOverDay},
+        #{priceDayOverDayPercentage},
+        #{closed},
+        #{opening},
+        #{high},
+        #{low},
+        #{vwap},
+        #{volume},
+        #{volumePercentage},
+        #{tradingValue},
+        #{marketCapitalization},
+        #{priceLowLimit},
+        #{priceHighLimit},
+        #{dateOfHighPrice},
+        #{yearlyHigh},
+        #{rateOfDeviationOfYearlyHigh},
+        #{dateOfLowPrice},
+        #{yearlyLow},
+        #{rateOfDeviationOfYearlyLow}
+        )
+    </insert>
+
+</mapper>
