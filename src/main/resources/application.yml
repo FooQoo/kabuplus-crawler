@@ -13,6 +13,7 @@ spring:
       idle-timeout: 20000
       max-lifetime: 60000
 
+gcs-resource-test-bucket: ${GCS_BACKET}
 
 logging.level:
   fooqoo.trade.stock.repository: debug

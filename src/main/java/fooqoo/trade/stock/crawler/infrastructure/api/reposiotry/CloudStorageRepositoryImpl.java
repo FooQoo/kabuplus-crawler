@@ -17,7 +17,7 @@ import java.nio.charset.Charset;
 @RequiredArgsConstructor
 public class CloudStorageRepositoryImpl implements CloudStorageRepository {
 
-  @Value("gs://stock-crawler-kabu-plus-backet/stock.json")
+  @Value("gs://${gcs-resource-test-bucket}/stock.json")
   private Resource gcsFile;
 
   private final ObjectMapper mapper;
