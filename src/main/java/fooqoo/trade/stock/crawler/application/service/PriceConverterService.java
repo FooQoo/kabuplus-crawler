@@ -3,7 +3,6 @@ package fooqoo.trade.stock.crawler.application.service;
 import fooqoo.trade.stock.crawler.domain.model.PriceConverter;
 import fooqoo.trade.stock.crawler.domain.model.write.Price;
 import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
@@ -98,7 +97,7 @@ public class PriceConverterService {
    * @return Integer型の数値
    */
   private Integer getIntegerFormat(final String number) {
-    return isInteger(number) ? Integer.parseInt(number) : null;
+    return isNumber(number) ? (new BigDecimal(number)).intValue() : null;
   }
 
   /**
@@ -112,22 +111,7 @@ public class PriceConverterService {
   }
 
   /**
-   * Integer型に変換できるか
-   *
-   * @param number 数値の文字列
-   * @return Integer型に変換できるか
-   */
-  private boolean isInteger(final String number) {
-    try {
-      Integer.parseInt(number);
-      return true;
-    } catch (NumberFormatException e) {
-      return false;
-    }
-  }
-
-  /**
-   * Float型に変換できるか
+   * 数値に変換できるか
    *
    * @param number 数値の文字列
    * @return Float型に変換できる
