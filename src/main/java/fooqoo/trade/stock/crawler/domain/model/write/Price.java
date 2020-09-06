@@ -1,6 +1,7 @@
 package fooqoo.trade.stock.crawler.domain.model.write;
 
 import lombok.Builder;
+import lombok.NonNull;
 import lombok.Value;
 
 import java.io.Serializable;
@@ -13,6 +14,7 @@ import java.time.LocalDate;
 public class Price implements Serializable {
 
   /** 銘柄コード */
+  @NonNull
   String code;
 
   /** 銘柄名 */
@@ -25,6 +27,7 @@ public class Price implements Serializable {
   String sector;
 
   /** 日時 */
+  @NonNull
   LocalDate crawledDate;
 
   /** 株価 */
