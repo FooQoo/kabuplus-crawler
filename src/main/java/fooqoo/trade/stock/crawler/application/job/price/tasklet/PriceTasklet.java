@@ -46,7 +46,11 @@ public class PriceTasklet implements Tasklet {
         response.getPrices().stream().map(processor::process).collect(Collectors.toList());
 
     // フィルタリングされた銘柄を保存
-    writer.write(priceFilterService.getFilteredPrice(priceList));
+    try {
+      writer.write(priceFilterService.getFilteredPrice(priceList));
+    } catch (Exception e) {
+      log.error("書き込み処理に失敗しました - {}", e.getMessage());
+    }
 
     log.info("complete insert chunk");
 

@@ -1,9 +1,11 @@
 package fooqoo.trade.stock.crawler.application.config;
 
+import fooqoo.trade.stock.crawler.application.job.JobListener;
 import fooqoo.trade.stock.crawler.application.job.price.PriceFileReader;
 import fooqoo.trade.stock.crawler.application.job.price.PriceWriter;
 import fooqoo.trade.stock.crawler.application.job.price.tasklet.PriceStorageTasklet;
 import fooqoo.trade.stock.crawler.application.job.price.tasklet.PriceTasklet;
+import fooqoo.trade.stock.crawler.application.job.price.tasklet.PurchaseSignedTasklet;
 import fooqoo.trade.stock.crawler.domain.model.write.Price;
 import lombok.RequiredArgsConstructor;
 import org.springframework.batch.core.Job;
@@ -25,6 +27,7 @@ public class PriceStepConfig {
   private static final String PRICE_STEP = "price";
   private static final String PRICE_CHUNK_STEP = "price_chunk";
   private static final String PRICE_STEP_GCS = "price_gcs";
+  private static final String UPLOAD_STEP = "upload_gcs";
 
   private static final int CHUNK_SIZE = 10000;
 
@@ -39,6 +42,10 @@ public class PriceStepConfig {
   private final PriceTasklet tasklet;
 
   private final PriceStorageTasklet storageTasklet;
+
+  private final PurchaseSignedTasklet purchaseSignedTasklet;
+
+  private final JobListener jobListener;
 
   @Bean(name = PRICE_CHUNK_STEP)
   public Step priceChunkStep() {
@@ -65,6 +72,16 @@ public class PriceStepConfig {
    *
    * @return Stepインスタンス
    */
+  @Bean(name = UPLOAD_STEP)
+  public Step uploadStep() {
+    return stepBuilderFactory.get(UPLOAD_STEP).tasklet(purchaseSignedTasklet).build();
+  }
+
+  /**
+   * ステップのbean
+   *
+   * @return Stepインスタンス
+   */
   @Bean(name = PRICE_STEP_GCS)
   public Step priceStorageStep() {
     return stepBuilderFactory.get(PRICE_STEP_GCS).tasklet(storageTasklet).build();
@@ -78,11 +95,14 @@ public class PriceStepConfig {
    * @throws Exception Job実行時の例外
    */
   @Bean
-  public Job job(@Qualifier(PRICE_STEP) Step priceStep) throws Exception {
+  public Job job(@Qualifier(PRICE_STEP) Step priceStep, @Qualifier(UPLOAD_STEP) Step uploadStep)
+      throws Exception {
     return jobBuilderFactory
         .get("job")
         .incrementer(new RunIdIncrementer())
+        .listener(jobListener)
         .start(priceStep)
+        .next(uploadStep)
         .build();
   }
 }
