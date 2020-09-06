@@ -2,6 +2,7 @@ package fooqoo.trade.stock.crawler.application.job.price.tasklet;
 
 import fooqoo.trade.stock.crawler.application.job.price.PriceReader;
 import fooqoo.trade.stock.crawler.application.service.CloudStorageService;
+import fooqoo.trade.stock.crawler.domain.model.PriceConverter;
 import fooqoo.trade.stock.crawler.domain.model.write.Price;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;

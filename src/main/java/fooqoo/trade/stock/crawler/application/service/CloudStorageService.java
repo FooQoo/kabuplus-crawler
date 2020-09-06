@@ -1,5 +1,6 @@
 package fooqoo.trade.stock.crawler.application.service;
 
+import fooqoo.trade.stock.crawler.domain.model.PriceConverter;
 import fooqoo.trade.stock.crawler.domain.model.write.Price;
 import fooqoo.trade.stock.crawler.domain.repository.CloudStorageRepository;
 import fooqoo.trade.stock.crawler.infrastructure.api.response.KabuPlusApiResponse;
@@ -34,8 +35,11 @@ public class CloudStorageService {
   }
 
   public void writeCloudResource(List<Price> prices) {
+
     try {
-      cloudStorageRepository.writeCloudResource(convertCsvFormat(prices));
+      cloudStorageRepository.writeCloudResource(
+          String.join(
+              "\n", String.join(",", PriceConverter.getColumnNames()), convertCsvFormat(prices)));
     } catch (IOException e) {
       log.error("ファイル書き込みに失敗しました");
     }
