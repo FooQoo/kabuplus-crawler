@@ -14,4 +14,6 @@ public interface CloudStorageRepository {
    * @throws IOException IOException
    */
   public KabuPlusApiResponse getCloudResource() throws IOException;
+
+  public void writeCloudResource(String csv) throws IOException;
 }
