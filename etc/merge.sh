@@ -26,7 +26,7 @@ fi
 jsonname=`basename ${output} | awk -F '.' '{print $1}'`
 
 # ファイル名取得
-mapfile -t files < <(ls -1 "$dir" | grep -e "202005" -e "202006" -e "202007" -e "202008")
+mapfile -t files < <(ls -1 "$dir" | grep -e "202006" -e "202007" -e "202008")
 
 # header取得 エンコード実行
 head -n 1 "$dir${files[0]}" | nkf | grep -v "^$" >"${output}"
