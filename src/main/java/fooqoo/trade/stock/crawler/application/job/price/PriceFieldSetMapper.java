@@ -10,9 +10,7 @@ import org.springframework.stereotype.Component;
 
 import java.util.Arrays;
 
-/**
- * PriceFieldSetMapper
- */
+/** PriceFieldSetMapper */
 @Component
 @RequiredArgsConstructor
 public class PriceFieldSetMapper implements FieldSetMapper<Price> {
