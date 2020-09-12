@@ -35,4 +35,18 @@ CREATE TABLE price IF NOT EXISTS (
     rate_of_deviation_of_yearly_low decimal(5, 2)
 );
 
+CREATE TABLE stock_index IF NOT EXISTS (
+    code int,
+    share int,
+    devided_yeild decimal(11, 2),
+    devided_per_share decimal(11, 2),
+    per decimal(11, 2),
+    pbr decimal(11, 2),
+    eps decimal(11, 2),
+    bps decimal(11, 2),
+    minimum_sales_amount int
+    crawled_date date
+);
+
+DROP TABLE stock_index;
 DROP TABLE price;

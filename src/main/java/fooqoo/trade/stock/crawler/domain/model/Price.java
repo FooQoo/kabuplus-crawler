@@ -1,4 +1,4 @@
-package fooqoo.trade.stock.crawler.domain.model.write;
+package fooqoo.trade.stock.crawler.domain.model;
 
 import lombok.Builder;
 import lombok.NonNull;

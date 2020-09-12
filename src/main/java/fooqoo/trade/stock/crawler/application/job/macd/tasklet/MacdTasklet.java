@@ -1,11 +1,6 @@
-package fooqoo.trade.stock.crawler.application.job.price.tasklet;
+package fooqoo.trade.stock.crawler.application.job.macd.tasklet;
 
-import fooqoo.trade.stock.crawler.application.job.price.PriceProcessor;
-import fooqoo.trade.stock.crawler.application.job.price.PriceWriter;
-import fooqoo.trade.stock.crawler.application.service.PriceFilterService;
-import fooqoo.trade.stock.crawler.domain.model.Price;
-import fooqoo.trade.stock.crawler.domain.repository.KabuPlusApiRepository;
-import fooqoo.trade.stock.crawler.infrastructure.api.response.KabuPlusApiResponse;
+import fooqoo.trade.stock.crawler.application.service.MacdService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.batch.core.StepContribution;
@@ -14,19 +9,15 @@ import org.springframework.batch.core.step.tasklet.Tasklet;
 import org.springframework.batch.repeat.RepeatStatus;
 import org.springframework.stereotype.Component;
 
-import java.util.List;
-import java.util.stream.Collectors;
+import java.time.LocalDate;
 
 /** Spring Batch タスクレット */
 @Slf4j
 @Component
 @RequiredArgsConstructor
-public class PriceTasklet implements Tasklet {
+public class MacdTasklet implements Tasklet {
 
-  private final KabuPlusApiRepository kabuPlusApiRepository;
-  private final PriceProcessor processor;
-  private final PriceWriter writer;
-  private final PriceFilterService priceFilterService;
+  private final MacdService macdService;
 
   /**
    * タスクレットの実行メソッド
@@ -40,14 +31,12 @@ public class PriceTasklet implements Tasklet {
   public RepeatStatus execute(
       final StepContribution stepContribution, final ChunkContext chunkContext) throws Exception {
 
-    KabuPlusApiResponse response = kabuPlusApiRepository.getLatestPrices();
-
-    List<Price> priceList =
-        response.getPrices().stream().map(processor::process).collect(Collectors.toList());
+    LocalDate today = macdService.getToday();
+    LocalDate latestDate = macdService.getLatestDate();
 
     // フィルタリングされた銘柄を保存
     try {
-      writer.write(priceFilterService.getFilteredPrice(priceList));
+      macdService.insertMacd(today, latestDate);
     } catch (Exception e) {
       log.error("書き込み処理に失敗しました - {}", e.getMessage());
     }

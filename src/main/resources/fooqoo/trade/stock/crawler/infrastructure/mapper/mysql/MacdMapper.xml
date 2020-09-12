@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="fooqoo.trade.stock.crawler.infrastructure.mapper.mysql.MacdMapper">
+
+    <resultMap id="LatestDate" type="fooqoo.trade.stock.crawler.domain.model.LatestDate">
+        <result property="crawled_date" column="crawledDate"/>
+    </resultMap>
+
+    <insert id="insertMacd" parameterType="string">
+        <![CDATA[
+        INSERT INTO macd
+        SELECT
+            M.code,
+            P.crawled_date,
+            short_ema * (1-(2/13)) + P.price * (2/13) as short_ema,
+            long_ema * (1-(2/27)) + P.price * (2/27) as long_ema
+        FROM
+            price P LEFT JOIN
+            macd M
+            ON P.code = M.code
+        WHERE
+            P.crawled_date = #{priceCrawledDate} -- 株価を参照する日付
+            AND M.crawled_date = #{macdCrawledDate} -- MACDを参照する日付
+        ;
+        ]]>
+    </insert>
+
+    <select id="getLatestDate" resultMap="LatestDate">
+        <![CDATA[
+        SELECT
+            MAX(crawled_date) AS crawled_date
+        FROM
+            macd
+        ;
+        ]]>
+    </select>
+</mapper>

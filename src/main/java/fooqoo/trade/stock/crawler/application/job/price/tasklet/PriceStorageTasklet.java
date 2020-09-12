@@ -4,7 +4,7 @@ import fooqoo.trade.stock.crawler.application.job.price.PriceProcessor;
 import fooqoo.trade.stock.crawler.application.job.price.PriceWriter;
 import fooqoo.trade.stock.crawler.application.service.CloudStorageService;
 import fooqoo.trade.stock.crawler.application.service.PriceFilterService;
-import fooqoo.trade.stock.crawler.domain.model.write.Price;
+import fooqoo.trade.stock.crawler.domain.model.Price;
 import fooqoo.trade.stock.crawler.infrastructure.api.response.KabuPlusApiResponse;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
