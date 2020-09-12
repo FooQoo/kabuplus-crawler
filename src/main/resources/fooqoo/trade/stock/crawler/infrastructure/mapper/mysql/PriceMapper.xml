@@ -3,7 +3,7 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="fooqoo.trade.stock.crawler.infrastructure.mapper.mysql.PriceMapper">
 
-    <resultMap id="Price" type="fooqoo.trade.stock.crawler.domain.model.write.Price">
+    <resultMap id="Price" type="fooqoo.trade.stock.crawler.domain.model.Price">
         <result property="code" column="code"/>
         <result property="codeName" column="code_name"/>
         <result property="market" column="market"/>
@@ -31,7 +31,7 @@
         <result property="rateOfDeviationOfYearlyLow" column="rate_of_deviation_of_yearly_low"/>
     </resultMap>
 
-    <insert id="insertPrice" parameterType="fooqoo.trade.stock.crawler.domain.model.write.Price">
+    <insert id="insertPrice" parameterType="fooqoo.trade.stock.crawler.domain.model.Price">
         <![CDATA[
         INSERT INTO price (
             code,

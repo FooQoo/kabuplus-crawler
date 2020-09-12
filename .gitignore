@@ -34,3 +34,4 @@ node_modules
 credentials.json
 env.yaml
 *.pem
+*.spf

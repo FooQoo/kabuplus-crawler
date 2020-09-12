@@ -1,7 +1,7 @@
 package fooqoo.trade.stock.crawler.application.service;
 
 import fooqoo.trade.stock.crawler.domain.model.Sector;
-import fooqoo.trade.stock.crawler.domain.model.write.Price;
+import fooqoo.trade.stock.crawler.domain.model.Price;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 

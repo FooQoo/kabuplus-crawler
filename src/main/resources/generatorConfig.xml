@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE generatorConfiguration PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
+        "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+
+<generatorConfiguration>
+
+    <context id="MySQLTables" targetRuntime="MyBatis3">
+        <plugin type="org.mybatis.generator.plugins.MapperAnnotationPlugin"/>
+        <plugin type="org.mybatis.generator.plugins.EqualsHashCodePlugin"/>
+        <plugin type="org.mybatis.generator.plugins.RowBoundsPlugin"/>
+        <plugin type="org.mybatis.generator.plugins.SerializablePlugin"/>
+        <plugin type="org.mybatis.generator.plugins.ToStringPlugin"/>
+        <plugin type="org.mybatis.generator.plugins.VirtualPrimaryKeyPlugin"/>
+        <plugin type="org.mybatis.generator.plugins.FluentBuilderMethodsPlugin"/>
+
+        <commentGenerator>
+            <property name="suppressDate" value="true"/>
+        </commentGenerator>
+
+        <!-- スキーマ情報を取得する DB への接続設定 -->
+        <jdbcConnection driverClass="com.mysql.cj.jdbc.Driver"
+                        connectionURL="jdbc:mysql://localhost:3306/kabuplus"
+                        userId="fooqoo"
+                        password="passw0rd">
+        </jdbcConnection>
+
+        <!-- LocalDatetime利用指定 -->
+        <javaTypeResolver>
+            <property name="forceBigDecimals" value="false"/>
+            <property name="useJSR310Types" value="true"/>
+        </javaTypeResolver>
+
+        <!-- SELECT 結果等を格納するドメインモデルを生成する設定 -->
+        <javaModelGenerator targetPackage="fooqoo.trade.stock.crawler.domain.model.write"
+                            targetProject="src/main/java">
+            <property name="enableSubPackages" value="true"/>
+            <property name="constructorBased" value="true"/>
+        </javaModelGenerator>
+
+        <!-- SQL 設定が記述された XML を生成する設定 -->
+        <sqlMapGenerator targetPackage="fooqoo.trade.stock.crawler.infrastructure.mapper.mysql"
+                         targetProject="src/main/resources">
+            <property name="enableSubPackages" value="true"/>
+        </sqlMapGenerator>
+
+        <!-- マッパークラスを生成する設定 -->
+        <javaClientGenerator type="XMLMAPPER"
+                             targetPackage="fooqoo.trade.stock.crawler.infrastructure.mapper.mysql"
+                             targetProject="src/main/java">
+            <property name="enableSubPackages" value="true"/>
+        </javaClientGenerator>
+
+
+        <table tableName="stock_index" modelType="hierarchical">
+            <!-- true：DBのカラム名がパスカルからキャメルケースになる -->
+            <property name="useActualColumnNames" value="true"/>
+            <!-- AutoIncrementで自動採番した値を取得する -->
+            <columnOverride column="DevidedYeild" javaType="java.math.BigDecimal" jdbcType="DECIMAL" />
+            <columnOverride column="DevidedPerShare" javaType="java.math.BigDecimal" jdbcType="DECIMAL" />
+            <columnOverride column="Per" javaType="java.math.BigDecimal" jdbcType="DECIMAL" />
+            <columnOverride column="Pbr" javaType="java.math.BigDecimal" jdbcType="DECIMAL" />
+            <columnOverride column="Eps" javaType="java.math.BigDecimal" jdbcType="DECIMAL" />
+            <columnOverride column="Bps" javaType="java.math.BigDecimal" jdbcType="DECIMAL" />
+            <columnOverride column="CrawledDate" javaType="java.time.LocalDateTime"
+                            typeHandler="org.apache.ibatis.type.LocalDateTimeTypeHandler"/>
+        </table>
+    </context>
+</generatorConfiguration>

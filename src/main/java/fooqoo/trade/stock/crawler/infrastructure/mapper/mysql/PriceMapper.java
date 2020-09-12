@@ -1,6 +1,6 @@
 package fooqoo.trade.stock.crawler.infrastructure.mapper.mysql;
 
-import fooqoo.trade.stock.crawler.domain.model.write.Price;
+import fooqoo.trade.stock.crawler.domain.model.Price;
 import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;

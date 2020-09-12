@@ -2,7 +2,7 @@ package fooqoo.trade.stock.crawler.application.job.price;
 
 import fooqoo.trade.stock.crawler.application.service.PriceConverterService;
 import fooqoo.trade.stock.crawler.domain.model.PriceConverter;
-import fooqoo.trade.stock.crawler.domain.model.write.Price;
+import fooqoo.trade.stock.crawler.domain.model.Price;
 import lombok.RequiredArgsConstructor;
 import org.springframework.batch.item.file.mapping.FieldSetMapper;
 import org.springframework.batch.item.file.transform.FieldSet;

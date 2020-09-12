@@ -1,7 +1,7 @@
 package fooqoo.trade.stock.crawler.application.job.price;
 
 import fooqoo.trade.stock.crawler.application.service.PriceConverterService;
-import fooqoo.trade.stock.crawler.domain.model.write.Price;
+import fooqoo.trade.stock.crawler.domain.model.Price;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.batch.core.configuration.annotation.StepScope;

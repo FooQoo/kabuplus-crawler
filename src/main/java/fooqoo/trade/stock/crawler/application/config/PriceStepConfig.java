@@ -1,12 +1,13 @@
 package fooqoo.trade.stock.crawler.application.config;
 
 import fooqoo.trade.stock.crawler.application.job.JobListener;
+import fooqoo.trade.stock.crawler.application.job.macd.tasklet.MacdTasklet;
 import fooqoo.trade.stock.crawler.application.job.price.PriceFileReader;
 import fooqoo.trade.stock.crawler.application.job.price.PriceWriter;
 import fooqoo.trade.stock.crawler.application.job.price.tasklet.PriceStorageTasklet;
 import fooqoo.trade.stock.crawler.application.job.price.tasklet.PriceTasklet;
 import fooqoo.trade.stock.crawler.application.job.price.tasklet.PurchaseSignedTasklet;
-import fooqoo.trade.stock.crawler.domain.model.write.Price;
+import fooqoo.trade.stock.crawler.domain.model.Price;
 import lombok.RequiredArgsConstructor;
 import org.springframework.batch.core.Job;
 import org.springframework.batch.core.Step;
@@ -28,6 +29,7 @@ public class PriceStepConfig {
   private static final String PRICE_CHUNK_STEP = "price_chunk";
   private static final String PRICE_STEP_GCS = "price_gcs";
   private static final String UPLOAD_STEP = "upload_gcs";
+  private static final String MACD_STEP = "macd_step";
 
   private static final int CHUNK_SIZE = 10000;
 
@@ -46,6 +48,8 @@ public class PriceStepConfig {
   private final PurchaseSignedTasklet purchaseSignedTasklet;
 
   private final JobListener jobListener;
+
+  private final MacdTasklet macdTasklet;
 
   @Bean(name = PRICE_CHUNK_STEP)
   public Step priceChunkStep() {
@@ -87,6 +91,11 @@ public class PriceStepConfig {
     return stepBuilderFactory.get(PRICE_STEP_GCS).tasklet(storageTasklet).build();
   }
 
+  @Bean(name = MACD_STEP)
+  public Step macdStep() {
+    return stepBuilderFactory.get(MACD_STEP).tasklet(macdTasklet).build();
+  }
+
   /**
    * Jobのbean
    *
@@ -95,13 +104,17 @@ public class PriceStepConfig {
    * @throws Exception Job実行時の例外
    */
   @Bean
-  public Job job(@Qualifier(PRICE_STEP) Step priceStep, @Qualifier(UPLOAD_STEP) Step uploadStep)
+  public Job job(
+      @Qualifier(PRICE_STEP) Step priceStep,
+      @Qualifier(UPLOAD_STEP) Step uploadStep,
+      @Qualifier(MACD_STEP) Step macdStep)
       throws Exception {
     return jobBuilderFactory
         .get("job")
         .incrementer(new RunIdIncrementer())
         .listener(jobListener)
         .start(priceStep)
+        .next(macdStep)
         .next(uploadStep)
         .build();
   }

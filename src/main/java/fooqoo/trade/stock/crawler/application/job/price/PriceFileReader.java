@@ -2,7 +2,7 @@ package fooqoo.trade.stock.crawler.application.job.price;
 
 import fooqoo.trade.stock.crawler.application.service.PriceConverterService;
 import fooqoo.trade.stock.crawler.domain.model.PriceConverter;
-import fooqoo.trade.stock.crawler.domain.model.write.Price;
+import fooqoo.trade.stock.crawler.domain.model.Price;
 import org.springframework.batch.core.configuration.annotation.StepScope;
 import org.springframework.batch.item.file.FlatFileItemReader;
 import org.springframework.batch.item.file.mapping.DefaultLineMapper;
