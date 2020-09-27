@@ -1,4 +1,4 @@
-package fooqoo.trade.stock.crawler.infrastructure.api.reposiotry;
+package fooqoo.trade.stock.crawler.infrastructure.api.reposiotryimpl;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import fooqoo.trade.stock.crawler.domain.repository.CloudStorageRepository;

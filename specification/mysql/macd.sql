@@ -5,6 +5,8 @@ CREATE TABLE IF NOT EXISTS macd (
     crawled_date date,
     short_ema decimal(11, 2),
     long_ema decimal(11, 2),
+    macd_value decimal(11, 2),
+    macd_signal decimal(11, 2),
     PRIMARY KEY(code, crawled_date)
 );
 
