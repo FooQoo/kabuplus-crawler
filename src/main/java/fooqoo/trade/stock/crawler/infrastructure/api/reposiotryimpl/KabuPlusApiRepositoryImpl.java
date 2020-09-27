@@ -1,4 +1,4 @@
-package fooqoo.trade.stock.crawler.infrastructure.api.reposiotry;
+package fooqoo.trade.stock.crawler.infrastructure.api.reposiotryimpl;
 
 import fooqoo.trade.stock.crawler.domain.repository.KabuPlusApiRepository;
 import fooqoo.trade.stock.crawler.infrastructure.api.config.KabuPlusConfig;

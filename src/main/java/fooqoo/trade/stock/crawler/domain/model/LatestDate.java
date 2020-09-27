@@ -1,8 +1,8 @@
 package fooqoo.trade.stock.crawler.domain.model;
 
 import lombok.Builder;
-import lombok.NonNull;
 import lombok.Value;
+import org.springframework.lang.NonNull;
 
 import java.time.LocalDate;
 
