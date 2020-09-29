@@ -15,7 +15,6 @@
                     P.crawled_date,
                     short_ema * (1-(2/13)) + P.price * (2/13) as short_ema,
                     long_ema * (1-(2/27)) + P.price * (2/27) as long_ema,
-                    AVG(short_ema - long_ema) OVER (PARTITION BY M.code ORDER BY P.crawled_date ROWS BETWEEN 9 PRECEDING AND CURRENT ROW) AS macd_signal,
                     short_ema * (1-(2/13)) + P.price * (2/13) - long_ema * (1-(2/27)) - P.price * (2/27) as macd_value
                 FROM
                     price P LEFT JOIN
@@ -25,7 +24,6 @@
                     P.crawled_date = #{priceCrawledDate} -- 株価を参照する日付
                     AND M.crawled_date = #{macdCrawledDate} -- MACDを参照する日付
                 ;
-
         ]]>
     </insert>
 

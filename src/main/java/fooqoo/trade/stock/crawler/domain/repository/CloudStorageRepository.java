@@ -13,7 +13,13 @@ public interface CloudStorageRepository {
    * @return json形式のデータ
    * @throws IOException IOException
    */
-  public KabuPlusApiResponse getCloudResource() throws IOException;
+  KabuPlusApiResponse getCloudResource() throws IOException;
 
-  public void writeCloudResource(String csv) throws IOException;
+  /**
+   * GCSにファイルを書き込む
+   *
+   * @param csv csv形式の文字列
+   * @throws IOException IOException
+   */
+  void writeCloudResource(String csv) throws IOException;
 }
