@@ -29,7 +29,7 @@ public class KabuPlusApiRepositoryImpl implements KabuPlusApiRepository {
 
     final HttpHeaders headers = new HttpHeaders();
 
-    String url =
+    final String url =
         UriComponentsBuilder.fromHttpUrl(config.getBaseUrl())
             .path(config.getPath())
             .build()

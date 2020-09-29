@@ -38,6 +38,11 @@ public enum PriceConverter {
   public final Integer index;
   public final String columnName;
 
+  /**
+   * カラム一覧を取得する
+   *
+   * @return カラムが保存された文字列の配列
+   */
   public static String[] getColumnNames() {
     return Arrays.stream(PriceConverter.values())
         .map(PriceConverter::getColumnName)

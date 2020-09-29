@@ -22,17 +22,34 @@ public class MacdService {
 
   private final MacdMapper mapper;
 
+  /**
+   * 当日の日付を獲得する
+   *
+   * @return 当日の日付
+   */
   public LocalDate getToday() {
     return nowZonedDt.toLocalDate();
   }
 
+  /**
+   * macdテーブルの最新日付を取得する
+   *
+   * @return 最新日付
+   */
   public LocalDate getLatestDate() {
     return mapper.getLatestDate().getCrawledDate();
   }
 
+  /**
+   * macdテーブルへの挿入
+   *
+   * @param today 当日日付
+   * @param latestDate 最新日付
+   */
   public void insertMacd(LocalDate today, LocalDate latestDate) {
-    String todayString = today.format(DateTimeFormatter.ofPattern(DATE_OF_PRICE_FORMAT));
-    String latestDateString = latestDate.format(DateTimeFormatter.ofPattern(DATE_OF_PRICE_FORMAT));
+    final String todayString = today.format(DateTimeFormatter.ofPattern(DATE_OF_PRICE_FORMAT));
+    final String latestDateString =
+        latestDate.format(DateTimeFormatter.ofPattern(DATE_OF_PRICE_FORMAT));
     mapper.insertMacd(todayString, latestDateString);
   }
 }

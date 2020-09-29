@@ -1,7 +1,7 @@
 package fooqoo.trade.stock.crawler.application.service;
 
-import fooqoo.trade.stock.crawler.domain.model.PriceConverter;
 import fooqoo.trade.stock.crawler.domain.model.Price;
+import fooqoo.trade.stock.crawler.domain.model.PriceConverter;
 import fooqoo.trade.stock.crawler.domain.repository.CloudStorageRepository;
 import fooqoo.trade.stock.crawler.infrastructure.api.response.KabuPlusApiResponse;
 import lombok.RequiredArgsConstructor;
@@ -34,6 +34,11 @@ public class CloudStorageService {
     return new KabuPlusApiResponse();
   }
 
+  /**
+   * GCSに書き込む
+   *
+   * @param prices 銘柄情報
+   */
   public void writeCloudResource(List<Price> prices) {
 
     try {
@@ -45,6 +50,12 @@ public class CloudStorageService {
     }
   }
 
+  /**
+   * csv形式に変換
+   *
+   * @param prices 銘柄情報
+   * @return CSV文字列に変換した銘柄情報
+   */
   private String convertCsvFormat(List<Price> prices) {
     return prices.stream()
         .map(

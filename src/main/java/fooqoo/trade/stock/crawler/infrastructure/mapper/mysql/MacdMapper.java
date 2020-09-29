@@ -10,8 +10,8 @@ import java.time.LocalDate;
 public interface MacdMapper {
 
   /** MACDの更新 */
-  public void insertMacd(final String priceCrawledDate, final String macdCrawledDate);
+  void insertMacd(final String priceCrawledDate, final String macdCrawledDate);
 
   /** 最新の日付の更新 */
-  public LatestDate getLatestDate();
+  LatestDate getLatestDate();
 }

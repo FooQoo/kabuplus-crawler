@@ -143,7 +143,7 @@
                 FROM
                     price P INNER JOIN PURCHACE_SIGNED_CODE S ON P.code = S.code AND P.crawled_date = S.latest_date
                 WHERE
-                    stage_before_three_days = '4/5/5' AND volume >= 10000 AND market_capitalization >= 10000
+                    stage_before_three_days = '5/5/4' AND volume >= 10000 AND market_capitalization >= 10000
                 ORDER BY
                     price_day_over_day_percentage
                 DESC

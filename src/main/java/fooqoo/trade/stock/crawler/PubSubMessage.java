@@ -4,6 +4,7 @@ import lombok.Data;
 
 import java.util.Map;
 
+/** pubsubメッセージのクラス */
 @Data
 public class PubSubMessage {
 

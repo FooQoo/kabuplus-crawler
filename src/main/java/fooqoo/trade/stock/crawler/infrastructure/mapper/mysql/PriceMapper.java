@@ -14,12 +14,12 @@ public interface PriceMapper {
    *
    * @param price DB保存用の銘柄情報
    */
-  public void insertPrice(final Price price);
+  void insertPrice(final Price price);
 
   /**
    * 買いサイン銘柄の取得
    *
    * @return
    */
-  public List<Price> findPurchaseSignedPrice();
+  List<Price> findPurchaseSignedPrice();
 }

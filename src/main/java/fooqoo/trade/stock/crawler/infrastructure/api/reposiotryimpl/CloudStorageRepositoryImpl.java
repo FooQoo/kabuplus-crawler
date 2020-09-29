@@ -40,7 +40,12 @@ public class CloudStorageRepositoryImpl implements CloudStorageRepository {
         KabuPlusApiResponse.class);
   }
 
-
+  /**
+   * GCSにファイル書き込み
+   *
+   * @param csv csv形式の文字列
+   * @throws IOException IOException
+   */
   public void writeCloudResource(String csv) throws IOException {
     try (OutputStream os = ((WritableResource) this.gcsWriteFile).getOutputStream()) {
       os.write(csv.getBytes());
