@@ -39,7 +39,7 @@ public class PurchaseSignedTasklet implements Tasklet {
             throws Exception {
 
         Price price;
-        List<Price> prices = new ArrayList<>();
+        final List<Price> prices = new ArrayList<>();
 
         reader.open(chunkContext.getStepContext().getStepExecution().getExecutionContext());
 

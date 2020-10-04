@@ -45,7 +45,7 @@ public class MacdService {
      * @param today      当日日付
      * @param latestDate 最新日付
      */
-    public void insertMacd(LocalDate today, LocalDate latestDate) {
+    public void insertMacd(final LocalDate today, final LocalDate latestDate) {
         final String todayString = today.format(DateTimeFormatter.ofPattern(DATE_OF_PRICE_FORMAT));
         final String latestDateString =
                 latestDate.format(DateTimeFormatter.ofPattern(DATE_OF_PRICE_FORMAT));

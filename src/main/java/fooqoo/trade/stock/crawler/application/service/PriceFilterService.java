@@ -33,8 +33,8 @@ public class PriceFilterService {
      * @param prices 銘柄
      * @return フィルタリングされた業種
      */
-    private List<Price> filterSector(List<Price> prices) {
-        List<Price> priceList = new ArrayList<>();
+    private List<Price> filterSector(final List<Price> prices) {
+        final List<Price> priceList = new ArrayList<>();
 
         for (Price price : prices) {
             for (Sector sector : MY_FILTER) {
@@ -53,7 +53,7 @@ public class PriceFilterService {
      * @param price 銘柄
      * @return フィルタリングされた銘柄
      */
-    public List<Price> getFilteredPrice(List<Price> price) {
+    public List<Price> getFilteredPrice(final List<Price> price) {
         return filterSector(price);
     }
 }

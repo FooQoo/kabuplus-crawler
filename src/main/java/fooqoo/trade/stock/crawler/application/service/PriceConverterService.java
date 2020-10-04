@@ -94,7 +94,7 @@ public class PriceConverterService {
     private LocalDate getFormattedDate(final String date, final String format) {
         try {
             return LocalDate.parse(date, DateTimeFormatter.ofPattern(format));
-        } catch (DateTimeParseException e) {
+        } catch (final DateTimeParseException e) {
             return null;
         }
     }
@@ -129,7 +129,7 @@ public class PriceConverterService {
         try {
             Float.parseFloat(number);
             return true;
-        } catch (NumberFormatException e) {
+        } catch (final NumberFormatException e) {
             return false;
         }
     }

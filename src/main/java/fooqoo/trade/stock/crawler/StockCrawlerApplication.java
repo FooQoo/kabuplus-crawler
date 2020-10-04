@@ -24,7 +24,7 @@ public class StockCrawlerApplication {
      * @param args args
      */
     public static void main(final String[] args) {
-        SpringApplication application = new SpringApplication(StockCrawlerApplication.class);
+        final SpringApplication application = new SpringApplication(StockCrawlerApplication.class);
 
         application.setWebApplicationType(WebApplicationType.NONE);
         application.run(args);
@@ -40,7 +40,7 @@ public class StockCrawlerApplication {
         return message -> {
             // The PubSubMessage data field arrives as a base-64 encoded string and must be decoded.
             // See: https://cloud.google.com/functions/docs/calling/pubsub#event_structure
-            String[] args = {getDecodedMessage(message)};
+            final String[] args = {getDecodedMessage(message)};
             StockCrawlerApplication.main(args);
         };
     }
@@ -51,7 +51,7 @@ public class StockCrawlerApplication {
      * @param message pubsubメッセージ
      * @return デコードされたdataパラメータ
      */
-    private String getDecodedMessage(PubSubMessage message) {
+    private String getDecodedMessage(final PubSubMessage message) {
         if (Objects.nonNull(message)) {
             if (StringUtils.isNoneBlank(message.getData())) {
                 return new String(Base64.getDecoder().decode(message.getData()),

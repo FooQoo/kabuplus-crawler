@@ -40,9 +40,9 @@ public class PriceStorageTasklet implements Tasklet {
             @NonNull final StepContribution stepContribution,
             @NonNull final ChunkContext chunkContext) {
 
-        KabuPlusApiResponse response = cloudStorageService.getPrice();
+        final KabuPlusApiResponse response = cloudStorageService.getPrice();
 
-        List<Price> priceList =
+        final List<Price> priceList =
                 response.getPrices().stream().map(processor::process).collect(Collectors.toList());
 
         // フィルタリングされた銘柄を保存

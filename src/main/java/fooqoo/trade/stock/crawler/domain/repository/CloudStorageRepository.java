@@ -22,5 +22,5 @@ public interface CloudStorageRepository {
      * @param csv csv形式の文字列
      * @throws IOException IOException
      */
-    void writeCloudResource(String csv) throws IOException;
+    void writeCloudResource(final String csv) throws IOException;
 }
