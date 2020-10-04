@@ -1,18 +1,19 @@
 package fooqoo.trade.stock.crawler;
 
+import java.util.Map;
 import lombok.Data;
 
-import java.util.Map;
-
-/** pubsubメッセージのクラス */
+/**
+ * pubsubメッセージのクラス.
+ */
 @Data
 public class PubSubMessage {
 
-  private String data;
+    private String data;
 
-  private Map<String, String> attributes;
+    private Map<String, String> attributes;
 
-  private String messageId;
+    private String messageId;
 
-  private String publishTime;
+    private String publishTime;
 }
