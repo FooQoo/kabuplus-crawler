@@ -46,7 +46,7 @@ public class CloudStorageRepositoryImpl implements CloudStorageRepository {
      * @param csv csv形式の文字列
      * @throws IOException IOException
      */
-    public void writeCloudResource(String csv) throws IOException {
+    public void writeCloudResource(final String csv) throws IOException {
         try (OutputStream os = ((WritableResource) this.gcsWriteFile).getOutputStream()) {
             os.write(csv.getBytes());
         }

@@ -27,7 +27,7 @@ public class PriceFieldSetMapper implements FieldSetMapper<Price> {
      */
     @NonNull
     public Price mapFieldSet(@NonNull final FieldSet arg) {
-        String[] priceArray =
+        final String[] priceArray =
                 Arrays.stream(PriceConverter.values())
                         .map(column -> arg.readString(column.getColumnName()))
                         .toArray(String[]::new);

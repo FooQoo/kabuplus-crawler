@@ -42,15 +42,15 @@ public class PriceTasklet implements Tasklet {
             @NonNull final StepContribution stepContribution,
             @NonNull final ChunkContext chunkContext) {
 
-        KabuPlusApiResponse response = kabuPlusApiRepository.getLatestPrices();
+        final KabuPlusApiResponse response = kabuPlusApiRepository.getLatestPrices();
 
-        List<Price> priceList =
+        final List<Price> priceList =
                 response.getPrices().stream().map(processor::process).collect(Collectors.toList());
 
         // フィルタリングされた銘柄を保存
         try {
             writer.write(priceFilterService.getFilteredPrice(priceList));
-        } catch (Exception e) {
+        } catch (final Exception e) {
             log.error("書き込み処理に失敗しました - {}", e.getMessage());
         }
 

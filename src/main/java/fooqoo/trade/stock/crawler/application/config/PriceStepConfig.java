@@ -110,9 +110,9 @@ public class PriceStepConfig {
      */
     @Bean
     public Job job(
-            @Qualifier(PRICE_STEP) Step priceStep,
-            @Qualifier(UPLOAD_STEP) Step uploadStep,
-            @Qualifier(MACD_STEP) Step macdStep) {
+            @Qualifier(PRICE_STEP) final Step priceStep,
+            @Qualifier(UPLOAD_STEP) final Step uploadStep,
+            @Qualifier(MACD_STEP) final Step macdStep) {
         return jobBuilderFactory
                 .get("job")
                 .incrementer(new RunIdIncrementer())

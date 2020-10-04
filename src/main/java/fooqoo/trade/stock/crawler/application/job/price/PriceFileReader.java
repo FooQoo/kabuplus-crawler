@@ -30,7 +30,7 @@ public class PriceFileReader extends FlatFileItemReader<Price> {
     public PriceFileReader(
             final PriceConverterService priceConverterService, final ResourceLoader resourceLoader)
             throws IOException {
-        Resource resource = resourceLoader.getResource("classpath:sample.csv");
+        final Resource resource = resourceLoader.getResource("classpath:sample.csv");
 
         setResource(new FileSystemResource(resource.getFile().toString()));
         setLineMapper(

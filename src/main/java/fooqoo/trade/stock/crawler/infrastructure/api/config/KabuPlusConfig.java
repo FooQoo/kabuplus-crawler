@@ -40,14 +40,14 @@ public class KabuPlusConfig {
      * @return RestTemplate
      */
     @Bean
-    public RestTemplate kabuPlusRestTemplate(RestTemplateBuilder restTemplateBuilder) {
+    public RestTemplate kabuPlusRestTemplate(final RestTemplateBuilder restTemplateBuilder) {
         return restTemplateBuilder
                 .additionalInterceptors(
                         (httpRequest, bytes, clientHttpRequestExecution) -> {
                             log.info(
                                     "kabu plus request - {}: {}", httpRequest.getMethodValue(),
                                     httpRequest.getURI());
-                            ClientHttpResponse response =
+                            final ClientHttpResponse response =
                                     clientHttpRequestExecution.execute(httpRequest, bytes);
                             log.info(
                                     "kabu plus response - {}: {}",
