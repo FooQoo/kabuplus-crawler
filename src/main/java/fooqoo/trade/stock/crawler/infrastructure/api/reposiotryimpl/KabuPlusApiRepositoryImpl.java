@@ -11,32 +11,35 @@ import org.springframework.stereotype.Repository;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.util.UriComponentsBuilder;
 
-/** KabuPlusApiRepository実装クラス */
+/**
+ * KabuPlusApiRepository実装クラス.
+ */
 @Repository
 @RequiredArgsConstructor
 public class KabuPlusApiRepositoryImpl implements KabuPlusApiRepository {
 
-  private final KabuPlusConfig config;
-  private final RestTemplate restTemplate;
+    private final KabuPlusConfig config;
+    private final RestTemplate restTemplate;
 
-  /**
-   * 最新の銘柄の価格を取得
-   *
-   * @return 株プラスのレスポンス
-   */
-  @Override
-  public KabuPlusApiResponse getLatestPrices() {
+    /**
+     * 最新の銘柄の価格を取得.
+     *
+     * @return 株プラスのレスポンス
+     */
+    @Override
+    public KabuPlusApiResponse getLatestPrices() {
 
-    final HttpHeaders headers = new HttpHeaders();
+        final HttpHeaders headers = new HttpHeaders();
 
-    final String url =
-        UriComponentsBuilder.fromHttpUrl(config.getBaseUrl())
-            .path(config.getPath())
-            .build()
-            .toString();
+        final String url =
+                UriComponentsBuilder.fromHttpUrl(config.getBaseUrl())
+                        .path(config.getPath())
+                        .build()
+                        .toString();
 
-    return restTemplate
-        .exchange(url, HttpMethod.GET, new HttpEntity<String>(headers), KabuPlusApiResponse.class)
-        .getBody();
-  }
+        return restTemplate
+                .exchange(url, HttpMethod.GET, new HttpEntity<String>(headers),
+                        KabuPlusApiResponse.class)
+                .getBody();
+    }
 }

@@ -55,12 +55,12 @@
             <!-- true：DBのカラム名がパスカルからキャメルケースになる -->
             <property name="useActualColumnNames" value="true"/>
             <!-- AutoIncrementで自動採番した値を取得する -->
-            <columnOverride column="DevidedYeild" javaType="java.math.BigDecimal" jdbcType="DECIMAL" />
-            <columnOverride column="DevidedPerShare" javaType="java.math.BigDecimal" jdbcType="DECIMAL" />
-            <columnOverride column="Per" javaType="java.math.BigDecimal" jdbcType="DECIMAL" />
-            <columnOverride column="Pbr" javaType="java.math.BigDecimal" jdbcType="DECIMAL" />
-            <columnOverride column="Eps" javaType="java.math.BigDecimal" jdbcType="DECIMAL" />
-            <columnOverride column="Bps" javaType="java.math.BigDecimal" jdbcType="DECIMAL" />
+            <columnOverride column="DevidedYeild" javaType="java.math.BigDecimal" jdbcType="DECIMAL"/>
+            <columnOverride column="DevidedPerShare" javaType="java.math.BigDecimal" jdbcType="DECIMAL"/>
+            <columnOverride column="Per" javaType="java.math.BigDecimal" jdbcType="DECIMAL"/>
+            <columnOverride column="Pbr" javaType="java.math.BigDecimal" jdbcType="DECIMAL"/>
+            <columnOverride column="Eps" javaType="java.math.BigDecimal" jdbcType="DECIMAL"/>
+            <columnOverride column="Bps" javaType="java.math.BigDecimal" jdbcType="DECIMAL"/>
             <columnOverride column="CrawledDate" javaType="java.time.LocalDateTime"
                             typeHandler="org.apache.ibatis.type.LocalDateTimeTypeHandler"/>
         </table>
