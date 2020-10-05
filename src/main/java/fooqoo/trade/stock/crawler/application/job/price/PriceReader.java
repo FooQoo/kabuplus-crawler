@@ -14,7 +14,7 @@ import org.springframework.stereotype.Component;
 public class PriceReader extends MyBatisCursorItemReader<Price> {
 
     private static final String STATEMENT_ID =
-            "fooqoo.trade.stock.crawler.infrastructure.mapper.mysql.1PriceMapper."
+            "fooqoo.trade.stock.crawler.infrastructure.mapper.mysql.PriceMapper."
                     + "findPurchaseSignedPrice";
 
     /**
