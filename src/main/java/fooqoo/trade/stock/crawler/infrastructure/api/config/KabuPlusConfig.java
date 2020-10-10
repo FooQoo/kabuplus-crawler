@@ -80,10 +80,10 @@ public class KabuPlusConfig {
      * @return 株価取得用パス
      */
     public String getPricePath() {
-        return path + "japan-all-stock-prices-2.json";
+        return path + "japan-all-stock-prices-2/daily/japan-all-stock-prices-2.json";
     }
 
     public String getIndexPath() {
-        return path + "japan-all-stock-data.json";
+        return path + "japan-all-stock-data/daily/japan-all-stock-data.json";
     }
 }
