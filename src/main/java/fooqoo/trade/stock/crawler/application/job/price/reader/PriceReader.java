@@ -1,8 +1,8 @@
-package fooqoo.trade.stock.crawler.application.job.price;
+package fooqoo.trade.stock.crawler.application.job.price.reader;
 
 import fooqoo.trade.stock.crawler.domain.model.Price;
 import org.apache.ibatis.session.SqlSessionFactory;
-import org.mybatis.spring.batch.MyBatisBatchItemWriter;
+import org.mybatis.spring.batch.MyBatisCursorItemReader;
 import org.springframework.batch.core.configuration.annotation.StepScope;
 import org.springframework.stereotype.Component;
 
@@ -11,18 +11,19 @@ import org.springframework.stereotype.Component;
  */
 @Component
 @StepScope
-public class PriceWriter extends MyBatisBatchItemWriter<Price> {
+public class PriceReader extends MyBatisCursorItemReader<Price> {
 
     private static final String STATEMENT_ID =
-            "fooqoo.trade.stock.crawler.infrastructure.mapper.mysql.PriceMapper.insertPrice";
+            "fooqoo.trade.stock.crawler.infrastructure.mapper.mysql.PriceMapper."
+                    + "findPurchaseSignedPrice";
 
     /**
      * コンストラクタ.
      *
      * @param sqlSessionFactory SqlSessionFactoryインスタンス
      */
-    public PriceWriter(final SqlSessionFactory sqlSessionFactory) {
+    public PriceReader(final SqlSessionFactory sqlSessionFactory) {
         setSqlSessionFactory(sqlSessionFactory);
-        setStatementId(STATEMENT_ID);
+        setQueryId(STATEMENT_ID);
     }
 }

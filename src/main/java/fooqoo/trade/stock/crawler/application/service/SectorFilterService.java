@@ -1,5 +1,6 @@
 package fooqoo.trade.stock.crawler.application.service;
 
+import fooqoo.trade.stock.crawler.domain.model.Index;
 import fooqoo.trade.stock.crawler.domain.model.Price;
 import fooqoo.trade.stock.crawler.domain.model.Sector;
 import java.util.ArrayList;
@@ -12,7 +13,7 @@ import org.springframework.stereotype.Service;
  */
 @Service
 @RequiredArgsConstructor
-public class PriceFilterService {
+public class SectorFilterService {
 
     /**
      * 大循環分析が当てはまりやすい業種.
@@ -28,12 +29,12 @@ public class PriceFilterService {
                     Sector.SERVICES);
 
     /**
-     * 業種フィルター.
+     * 価格用業種フィルター.
      *
      * @param prices 銘柄
      * @return フィルタリングされた業種
      */
-    private List<Price> filterSector(final List<Price> prices) {
+    public List<Price> filterSectorPrice(final List<Price> prices) {
         final List<Price> priceList = new ArrayList<>();
 
         for (Price price : prices) {
@@ -48,12 +49,22 @@ public class PriceFilterService {
     }
 
     /**
-     * 独自フィルタを適用するメソッド.
+     * 指数用業種フィルター.
      *
-     * @param price 銘柄
+     * @param indexes 銘柄
      * @return フィルタリングされた銘柄
      */
-    public List<Price> getFilteredPrice(final List<Price> price) {
-        return filterSector(price);
+    public List<Index> filterSectorIndex(final List<Index> indexes) {
+        final List<Index> priceList = new ArrayList<>();
+
+        for (Index index : indexes) {
+            for (Sector sector : MY_FILTER) {
+                if (index.getSector().equals(sector.getName())) {
+                    priceList.add(index);
+                }
+            }
+        }
+
+        return priceList;
     }
 }

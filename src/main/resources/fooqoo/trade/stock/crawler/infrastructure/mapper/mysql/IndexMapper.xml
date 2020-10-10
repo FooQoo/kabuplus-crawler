@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="fooqoo.trade.stock.crawler.infrastructure.mapper.mysql.IndexMapper">
+
+    <resultMap id="Index" type="fooqoo.trade.stock.crawler.domain.model.Index">
+        <result property="code" column="code"/>
+        <result property="sector" column="sector"/>
+        <result property="crawledDate" column="crawled_date"/>
+        <result property="share" column="share"/>
+        <result property="yield" column="yield"/>
+        <result property="forwardPer" column="forward_per"/>
+        <result property="trailingPer" column="trailing_per"/>
+        <result property="forwardEps" column="forward_eps"/>
+        <result property="trailingBps" column="trailing_bps"/>
+    </resultMap>
+
+    <insert id="insertIndex" parameterType="fooqoo.trade.stock.crawler.domain.model.Index">
+        <![CDATA[
+        INSERT INTO index (
+            code,
+            sector,
+            crawled_date,
+            share,
+            yield,
+            forward_per,
+            trailing_per,
+            forward_eps,
+            trailing_bps
+        ) values (
+            #{code},
+            #{sector},
+            #{crawledDate},
+            #{share},
+            #{yield},
+            #{forwardPer},
+            #{trailingPer},
+            #{forwardEps},
+            #{trailingBps}
+        )
+        ]]>
+    </insert>
+
+</mapper>

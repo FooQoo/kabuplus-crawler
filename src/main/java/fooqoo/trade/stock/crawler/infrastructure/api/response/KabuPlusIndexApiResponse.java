@@ -12,15 +12,15 @@ import lombok.RequiredArgsConstructor;
  */
 @Data
 @RequiredArgsConstructor
-public class KabuPlusApiResponse implements Serializable {
+public class KabuPlusIndexApiResponse implements Serializable {
 
-    @JsonProperty("japan-all-stock-prices-2")
-    private final List<String[]> prices;
+    @JsonProperty("japan-all-stock-data")
+    private final List<String[]> indexes;
 
     /**
      * デフォルトコンストラクタ.
      */
-    public KabuPlusApiResponse() {
-        this.prices = new ArrayList<>();
+    public KabuPlusIndexApiResponse() {
+        this.indexes = new ArrayList<>();
     }
 }

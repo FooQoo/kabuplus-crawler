@@ -2,8 +2,8 @@ package fooqoo.trade.stock.crawler.application.config;
 
 import fooqoo.trade.stock.crawler.application.job.JobListener;
 import fooqoo.trade.stock.crawler.application.job.macd.tasklet.MacdTasklet;
-import fooqoo.trade.stock.crawler.application.job.price.PriceFileReader;
-import fooqoo.trade.stock.crawler.application.job.price.PriceWriter;
+import fooqoo.trade.stock.crawler.application.job.price.reader.PriceFileReader;
+import fooqoo.trade.stock.crawler.application.job.price.writer.PriceWriter;
 import fooqoo.trade.stock.crawler.application.job.price.tasklet.PriceStorageTasklet;
 import fooqoo.trade.stock.crawler.application.job.price.tasklet.PriceTasklet;
 import fooqoo.trade.stock.crawler.application.job.price.tasklet.PurchaseSignedTasklet;
@@ -25,7 +25,7 @@ import org.springframework.stereotype.Component;
 @Component
 @RequiredArgsConstructor
 @EnableBatchProcessing
-public class PriceStepConfig {
+public class StockStepConfig {
     private static final String PRICE_STEP = "price";
     private static final String PRICE_CHUNK_STEP = "price_chunk";
     private static final String PRICE_STEP_GCS = "price_gcs";

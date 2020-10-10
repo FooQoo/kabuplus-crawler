@@ -1,6 +1,6 @@
 package fooqoo.trade.stock.crawler.domain.repository;
 
-import fooqoo.trade.stock.crawler.infrastructure.api.response.KabuPlusApiResponse;
+import fooqoo.trade.stock.crawler.infrastructure.api.response.KabuPlusPriceApiResponse;
 import java.io.IOException;
 
 /**
@@ -14,7 +14,7 @@ public interface CloudStorageRepository {
      * @return json形式のデータ
      * @throws IOException IOException
      */
-    KabuPlusApiResponse getCloudResource() throws IOException;
+    KabuPlusPriceApiResponse getCloudResource() throws IOException;
 
     /**
      * GCSにファイルを書き込む.

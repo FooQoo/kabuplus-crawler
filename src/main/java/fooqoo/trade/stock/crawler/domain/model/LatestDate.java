@@ -1,5 +1,6 @@
 package fooqoo.trade.stock.crawler.domain.model;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 import lombok.Builder;
 import lombok.Value;
@@ -10,7 +11,7 @@ import org.springframework.lang.NonNull;
  */
 @Value
 @Builder
-public class LatestDate {
+public class LatestDate implements Serializable {
 
     /**
      * 日時.

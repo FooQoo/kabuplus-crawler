@@ -1,5 +1,6 @@
-package fooqoo.trade.stock.crawler.application.job.price;
+package fooqoo.trade.stock.crawler.application.job.price.reader;
 
+import fooqoo.trade.stock.crawler.application.job.price.reader.PriceFieldSetMapper;
 import fooqoo.trade.stock.crawler.application.service.PriceConverterService;
 import fooqoo.trade.stock.crawler.domain.model.Price;
 import fooqoo.trade.stock.crawler.domain.model.PriceConverter;

@@ -1,11 +1,11 @@
-package fooqoo.trade.stock.crawler.application.job.price.tasklet;
+package fooqoo.trade.stock.crawler.application.job.index.tasklet;
 
-import fooqoo.trade.stock.crawler.application.job.price.processor.PriceProcessor;
-import fooqoo.trade.stock.crawler.application.job.price.writer.PriceWriter;
+import fooqoo.trade.stock.crawler.application.job.index.processor.IndexProcessor;
+import fooqoo.trade.stock.crawler.application.job.index.writer.IndexWriter;
 import fooqoo.trade.stock.crawler.application.service.SectorFilterService;
-import fooqoo.trade.stock.crawler.domain.model.Price;
+import fooqoo.trade.stock.crawler.domain.model.Index;
 import fooqoo.trade.stock.crawler.domain.repository.KabuPlusApiRepository;
-import fooqoo.trade.stock.crawler.infrastructure.api.response.KabuPlusPriceApiResponse;
+import fooqoo.trade.stock.crawler.infrastructure.api.response.KabuPlusIndexApiResponse;
 import java.util.List;
 import java.util.stream.Collectors;
 import lombok.RequiredArgsConstructor;
@@ -18,38 +18,38 @@ import org.springframework.lang.NonNull;
 import org.springframework.stereotype.Component;
 
 /**
- * Spring Batch タスクレット.
+ * 銘柄指数用タスクレット.
  */
 @Slf4j
 @Component
 @RequiredArgsConstructor
-public class PriceTasklet implements Tasklet {
+public class IndexTasklet implements Tasklet {
 
     private final KabuPlusApiRepository kabuPlusApiRepository;
-    private final PriceProcessor processor;
-    private final PriceWriter writer;
+    private final IndexProcessor processor;
+    private final IndexWriter writer;
     private final SectorFilterService sectorFilterService;
+
 
     /**
      * タスクレットの実行メソッド.
      *
-     * @param stepContribution StepContributionインスタンス
-     * @param chunkContext     ChunkContextインスタンス
+     * @param contribution StepContributionインスタンス
+     * @param chunkContext ChunkContextインスタンス
      * @return 実行ステータス
      */
     @Override
-    public RepeatStatus execute(
-            @NonNull final StepContribution stepContribution,
-            @NonNull final ChunkContext chunkContext) {
+    public RepeatStatus execute(@NonNull final StepContribution contribution,
+                                @NonNull final ChunkContext chunkContext) {
 
-        final KabuPlusPriceApiResponse response = kabuPlusApiRepository.getLatestPrices();
+        final KabuPlusIndexApiResponse response = kabuPlusApiRepository.getLatestIndexes();
 
-        final List<Price> priceList =
-                response.getPrices().stream().map(processor::process).collect(Collectors.toList());
+        final List<Index> indexList =
+                response.getIndexes().stream().map(processor::process).collect(Collectors.toList());
 
         // フィルタリングされた銘柄を保存
         try {
-            writer.write(sectorFilterService.filterSectorPrice(priceList));
+            writer.write(sectorFilterService.filterSectorIndex(indexList));
         } catch (final Exception e) {
             log.error("書き込み処理に失敗しました - {}", e.getMessage());
         }

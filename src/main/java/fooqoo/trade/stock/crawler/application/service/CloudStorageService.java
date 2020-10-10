@@ -3,7 +3,7 @@ package fooqoo.trade.stock.crawler.application.service;
 import fooqoo.trade.stock.crawler.domain.model.Price;
 import fooqoo.trade.stock.crawler.domain.model.PriceConverter;
 import fooqoo.trade.stock.crawler.domain.repository.CloudStorageRepository;
-import fooqoo.trade.stock.crawler.infrastructure.api.response.KabuPlusApiResponse;
+import fooqoo.trade.stock.crawler.infrastructure.api.response.KabuPlusPriceApiResponse;
 import java.io.IOException;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -26,13 +26,13 @@ public class CloudStorageService {
      *
      * @return KabuPlusApiResponse
      */
-    public KabuPlusApiResponse getPrice() {
+    public KabuPlusPriceApiResponse getPrice() {
         try {
             return cloudStorageRepository.getCloudResource();
         } catch (final IOException e) {
             log.error("ファイル読み取りに失敗しました");
         }
-        return new KabuPlusApiResponse();
+        return new KabuPlusPriceApiResponse();
     }
 
     /**
