@@ -139,8 +139,8 @@ public class StockStepConfig {
                 .listener(jobListener)
                 .start(priceStep)
                 .next(indexStep)
-                //.next(macdStep)
-                //.next(uploadStep)
+                .next(macdStep)
+                .next(uploadStep)
                 .build();
     }
 }
