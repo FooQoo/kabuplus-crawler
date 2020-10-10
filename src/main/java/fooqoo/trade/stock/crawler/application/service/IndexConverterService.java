@@ -69,7 +69,7 @@ public class IndexConverterService {
      * @return Integer型の数値
      */
     private Integer getIntegerFormat(final String number) {
-        return isNumber(number) ? (new BigDecimal(number)).intValue() : null;
+        return isNumber(number) ? (new BigDecimal(number)).intValue() : 0;
     }
 
     /**
@@ -79,7 +79,7 @@ public class IndexConverterService {
      * @return BigDecimal型の数値
      */
     private BigDecimal getBigDecimalFormat(final String number) {
-        return isNumber(number) ? new BigDecimal(number) : null;
+        return isNumber(number) ? new BigDecimal(number) : new BigDecimal("0.00");
     }
 
     /**

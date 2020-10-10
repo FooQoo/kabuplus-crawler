@@ -33,13 +33,13 @@ public class MacdTasklet implements Tasklet {
             @NonNull final StepContribution stepContribution,
             @NonNull final ChunkContext chunkContext) {
 
-        LocalDate today = macdService.getToday();
-        LocalDate latestDate = macdService.getLatestDate();
+        final LocalDate today = macdService.getToday();
+        final LocalDate latestDate = macdService.getLatestDate();
 
         // フィルタリングされた銘柄を保存
         try {
             macdService.insertMacd(today, latestDate);
-        } catch (Exception e) {
+        } catch (final Exception e) {
             log.error("書き込み処理に失敗しました - {}", e.getMessage());
         }
 

@@ -17,7 +17,7 @@
 
     <insert id="insertIndex" parameterType="fooqoo.trade.stock.crawler.domain.model.Index">
         <![CDATA[
-        INSERT INTO index (
+        INSERT INTO idx (
             code,
             sector,
             crawled_date,
