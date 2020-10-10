@@ -2,7 +2,8 @@ package fooqoo.trade.stock.crawler.infrastructure.api.reposiotryimpl;
 
 import fooqoo.trade.stock.crawler.domain.repository.KabuPlusApiRepository;
 import fooqoo.trade.stock.crawler.infrastructure.api.config.KabuPlusConfig;
-import fooqoo.trade.stock.crawler.infrastructure.api.response.KabuPlusApiResponse;
+import fooqoo.trade.stock.crawler.infrastructure.api.response.KabuPlusIndexApiResponse;
+import fooqoo.trade.stock.crawler.infrastructure.api.response.KabuPlusPriceApiResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
@@ -22,24 +23,41 @@ public class KabuPlusApiRepositoryImpl implements KabuPlusApiRepository {
     private final RestTemplate restTemplate;
 
     /**
-     * 最新の銘柄の価格を取得.
-     *
-     * @return 株プラスのレスポンス
+     * {@inheritDoc}
      */
     @Override
-    public KabuPlusApiResponse getLatestPrices() {
+    public KabuPlusPriceApiResponse getLatestPrices() {
 
         final HttpHeaders headers = new HttpHeaders();
 
         final String url =
                 UriComponentsBuilder.fromHttpUrl(config.getBaseUrl())
-                        .path(config.getPath())
+                        .path(config.getPricePath())
                         .build()
                         .toString();
 
         return restTemplate
                 .exchange(url, HttpMethod.GET, new HttpEntity<String>(headers),
-                        KabuPlusApiResponse.class)
+                        KabuPlusPriceApiResponse.class)
+                .getBody();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public KabuPlusIndexApiResponse getLatestIndexes() {
+        final HttpHeaders headers = new HttpHeaders();
+
+        final String url =
+                UriComponentsBuilder.fromHttpUrl(config.getBaseUrl())
+                        .path(config.getIndexPath())
+                        .build()
+                        .toString();
+
+        return restTemplate
+                .exchange(url, HttpMethod.GET, new HttpEntity<String>(headers),
+                        KabuPlusIndexApiResponse.class)
                 .getBody();
     }
 }

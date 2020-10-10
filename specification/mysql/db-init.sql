@@ -7,7 +7,7 @@ GRANT ALL PRIVILEGES on kabuplus.* TO 'fooqoo'@'%';
 
 -- テーブル作成
 USE kabuplus;
-CREATE TABLE price IF NOT EXISTS (
+CREATE TABLE IF NOT EXISTS price  (
     code int,
     code_name varchar(255),
     market varchar(255),
@@ -32,21 +32,22 @@ CREATE TABLE price IF NOT EXISTS (
     rate_of_deviation_of_yearly_high decimal(5, 2),
     date_of_low_price date,
     yearly_low int,
-    rate_of_deviation_of_yearly_low decimal(5, 2)
+    rate_of_deviation_of_yearly_low decimal(5, 2),
+    PRIMARY KEY(code, crawled_date)
 );
 
-CREATE TABLE stock_index IF NOT EXISTS (
+CREATE TABLE IF NOT EXISTS idx (
     code int,
+    sector varchar(255),
+    crawled_date date,
     share int,
-    devided_yeild decimal(11, 2),
-    devided_per_share decimal(11, 2),
-    per decimal(11, 2),
-    pbr decimal(11, 2),
-    eps decimal(11, 2),
-    bps decimal(11, 2),
-    minimum_sales_amount int
-    crawled_date date
+    yield decimal(11, 2) DEFAULT 0.00,
+    forward_per decimal(11, 2),
+    trailing_per decimal(11, 2),
+    forward_eps decimal(11, 2),
+    trailing_bps decimal(11, 2),
+    PRIMARY KEY(code, crawled_date)
 );
 
-DROP TABLE stock_index;
+DROP TABLE index;
 DROP TABLE price;

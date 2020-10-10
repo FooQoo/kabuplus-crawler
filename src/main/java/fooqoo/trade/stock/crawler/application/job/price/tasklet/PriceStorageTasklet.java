@@ -1,10 +1,10 @@
 package fooqoo.trade.stock.crawler.application.job.price.tasklet;
 
-import fooqoo.trade.stock.crawler.application.job.price.PriceProcessor;
-import fooqoo.trade.stock.crawler.application.job.price.PriceWriter;
+import fooqoo.trade.stock.crawler.application.job.price.processor.PriceProcessor;
+import fooqoo.trade.stock.crawler.application.job.price.writer.PriceWriter;
 import fooqoo.trade.stock.crawler.application.service.CloudStorageService;
 import fooqoo.trade.stock.crawler.domain.model.Price;
-import fooqoo.trade.stock.crawler.infrastructure.api.response.KabuPlusApiResponse;
+import fooqoo.trade.stock.crawler.infrastructure.api.response.KabuPlusPriceApiResponse;
 import java.util.List;
 import java.util.stream.Collectors;
 import lombok.RequiredArgsConstructor;
@@ -40,7 +40,7 @@ public class PriceStorageTasklet implements Tasklet {
             @NonNull final StepContribution stepContribution,
             @NonNull final ChunkContext chunkContext) {
 
-        final KabuPlusApiResponse response = cloudStorageService.getPrice();
+        final KabuPlusPriceApiResponse response = cloudStorageService.getPrice();
 
         final List<Price> priceList =
                 response.getPrices().stream().map(processor::process).collect(Collectors.toList());

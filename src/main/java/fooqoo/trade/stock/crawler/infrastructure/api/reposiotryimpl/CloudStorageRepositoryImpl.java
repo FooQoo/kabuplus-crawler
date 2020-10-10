@@ -2,7 +2,7 @@ package fooqoo.trade.stock.crawler.infrastructure.api.reposiotryimpl;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import fooqoo.trade.stock.crawler.domain.repository.CloudStorageRepository;
-import fooqoo.trade.stock.crawler.infrastructure.api.response.KabuPlusApiResponse;
+import fooqoo.trade.stock.crawler.infrastructure.api.response.KabuPlusPriceApiResponse;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.nio.charset.Charset;
@@ -33,11 +33,11 @@ public class CloudStorageRepositoryImpl implements CloudStorageRepository {
      * @throws IOException IOException
      */
     @Override
-    public KabuPlusApiResponse getCloudResource() throws IOException {
+    public KabuPlusPriceApiResponse getCloudResource() throws IOException {
         return mapper.readValue(
                 StreamUtils
                         .copyToString(this.gcsReadFile.getInputStream(), Charset.defaultCharset()),
-                KabuPlusApiResponse.class);
+                KabuPlusPriceApiResponse.class);
     }
 
     /**

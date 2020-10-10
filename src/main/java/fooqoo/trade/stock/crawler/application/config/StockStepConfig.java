@@ -1,12 +1,13 @@
 package fooqoo.trade.stock.crawler.application.config;
 
 import fooqoo.trade.stock.crawler.application.job.JobListener;
+import fooqoo.trade.stock.crawler.application.job.index.tasklet.IndexTasklet;
 import fooqoo.trade.stock.crawler.application.job.macd.tasklet.MacdTasklet;
-import fooqoo.trade.stock.crawler.application.job.price.PriceFileReader;
-import fooqoo.trade.stock.crawler.application.job.price.PriceWriter;
+import fooqoo.trade.stock.crawler.application.job.price.reader.PriceFileReader;
 import fooqoo.trade.stock.crawler.application.job.price.tasklet.PriceStorageTasklet;
 import fooqoo.trade.stock.crawler.application.job.price.tasklet.PriceTasklet;
 import fooqoo.trade.stock.crawler.application.job.price.tasklet.PurchaseSignedTasklet;
+import fooqoo.trade.stock.crawler.application.job.price.writer.PriceWriter;
 import fooqoo.trade.stock.crawler.domain.model.Price;
 import lombok.RequiredArgsConstructor;
 import org.springframework.batch.core.Job;
@@ -25,12 +26,13 @@ import org.springframework.stereotype.Component;
 @Component
 @RequiredArgsConstructor
 @EnableBatchProcessing
-public class PriceStepConfig {
+public class StockStepConfig {
     private static final String PRICE_STEP = "price";
     private static final String PRICE_CHUNK_STEP = "price_chunk";
     private static final String PRICE_STEP_GCS = "price_gcs";
     private static final String UPLOAD_STEP = "upload_gcs";
     private static final String MACD_STEP = "macd_step";
+    private static final String INDEX_STEP = "index_step";
 
     private static final int CHUNK_SIZE = 10000;
 
@@ -51,6 +53,8 @@ public class PriceStepConfig {
     private final JobListener jobListener;
 
     private final MacdTasklet macdTasklet;
+
+    private final IndexTasklet indexTasklet;
 
     /**
      * priceChunkStep.
@@ -97,9 +101,24 @@ public class PriceStepConfig {
         return stepBuilderFactory.get(PRICE_STEP_GCS).tasklet(storageTasklet).build();
     }
 
+    /**
+     * ステップのbean.
+     *
+     * @return Stepインスタンス
+     */
     @Bean(name = MACD_STEP)
     public Step macdStep() {
         return stepBuilderFactory.get(MACD_STEP).tasklet(macdTasklet).build();
+    }
+
+    /**
+     * ステップのbean.
+     *
+     * @return Stepインスタンス
+     */
+    @Bean(name = INDEX_STEP)
+    public Step indexStep() {
+        return stepBuilderFactory.get(INDEX_STEP).tasklet(indexTasklet).build();
     }
 
     /**
@@ -112,12 +131,14 @@ public class PriceStepConfig {
     public Job job(
             @Qualifier(PRICE_STEP) final Step priceStep,
             @Qualifier(UPLOAD_STEP) final Step uploadStep,
-            @Qualifier(MACD_STEP) final Step macdStep) {
+            @Qualifier(MACD_STEP) final Step macdStep,
+            @Qualifier(INDEX_STEP) final Step indexStep) {
         return jobBuilderFactory
                 .get("job")
                 .incrementer(new RunIdIncrementer())
                 .listener(jobListener)
                 .start(priceStep)
+                .next(indexStep)
                 .next(macdStep)
                 .next(uploadStep)
                 .build();

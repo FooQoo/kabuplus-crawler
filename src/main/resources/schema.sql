@@ -26,3 +26,25 @@ CREATE TABLE IF NOT EXISTS price (
     rate_of_deviation_of_yearly_low decimal(11, 2),
     PRIMARY KEY(code, crawled_date)
 );
+
+CREATE TABLE IF NOT EXISTS idx (
+    code int,
+    sector varchar(255),
+    crawled_date date,
+    share int,
+    yield decimal(11, 2),
+    forward_per decimal(11, 2),
+    trailing_per decimal(11, 2),
+    forward_eps decimal(11, 2),
+    trailing_bps decimal(11, 2),
+    PRIMARY KEY(code, crawled_date)
+);
+
+CREATE TABLE IF NOT EXISTS macd (
+    code int NOT NULL,
+    crawled_date date,
+    short_ema decimal(11, 2),
+    long_ema decimal(11, 2),
+    macd_value decimal(11, 2),
+    PRIMARY KEY(code, crawled_date)
+);

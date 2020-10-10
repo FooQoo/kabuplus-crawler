@@ -17,7 +17,7 @@ extension:
   api:
     kabu-plus:
       base-url: http://localhost:3000
-      path: /sample.json
+      path: /
       connect-timeout: 1000
       read-timeout: 1000
       username: username

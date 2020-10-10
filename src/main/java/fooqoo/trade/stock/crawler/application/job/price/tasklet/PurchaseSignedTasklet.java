@@ -1,6 +1,6 @@
 package fooqoo.trade.stock.crawler.application.job.price.tasklet;
 
-import fooqoo.trade.stock.crawler.application.job.price.PriceReader;
+import fooqoo.trade.stock.crawler.application.job.price.reader.PriceReader;
 import fooqoo.trade.stock.crawler.application.service.CloudStorageService;
 import fooqoo.trade.stock.crawler.domain.model.Price;
 import java.util.ArrayList;

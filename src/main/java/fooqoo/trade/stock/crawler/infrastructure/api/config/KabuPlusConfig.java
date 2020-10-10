@@ -8,7 +8,9 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.boot.context.properties.ConstructorBinding;
 import org.springframework.boot.web.client.RestTemplateBuilder;
 import org.springframework.context.annotation.Bean;
+import org.springframework.http.client.BufferingClientHttpRequestFactory;
 import org.springframework.http.client.ClientHttpResponse;
+import org.springframework.http.client.SimpleClientHttpRequestFactory;
 import org.springframework.web.client.RestTemplate;
 
 /**
@@ -36,12 +38,11 @@ public class KabuPlusConfig {
     /**
      * 株+のRestTemplate取得.
      *
-     * @param restTemplateBuilder RestTemplateBuilderインスタンス
      * @return RestTemplate
      */
     @Bean
-    public RestTemplate kabuPlusRestTemplate(final RestTemplateBuilder restTemplateBuilder) {
-        return restTemplateBuilder
+    public RestTemplate kabuPlusRestTemplate() {
+        return getRestTemplateBuilder()
                 .additionalInterceptors(
                         (httpRequest, bytes, clientHttpRequestExecution) -> {
                             log.info(
@@ -59,5 +60,30 @@ public class KabuPlusConfig {
                 .setReadTimeout(readTimeout)
                 .basicAuthentication(username, password)
                 .build();
+    }
+
+    /**
+     * RestTemaplteBuilderを取得.
+     *
+     * @return RestTemplateBuilder
+     */
+    private RestTemplateBuilder getRestTemplateBuilder() {
+        final BufferingClientHttpRequestFactory bufferingClientHttpRequestFactory =
+                new BufferingClientHttpRequestFactory(new SimpleClientHttpRequestFactory());
+
+        return new RestTemplateBuilder().requestFactory(() -> bufferingClientHttpRequestFactory);
+    }
+
+    /**
+     * 株価取得用のパスを取得.
+     *
+     * @return 株価取得用パス
+     */
+    public String getPricePath() {
+        return path + "japan-all-stock-prices-2.json";
+    }
+
+    public String getIndexPath() {
+        return path + "japan-all-stock-data.json";
     }
 }
