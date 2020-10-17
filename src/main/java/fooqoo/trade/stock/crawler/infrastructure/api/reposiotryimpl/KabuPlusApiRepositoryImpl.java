@@ -3,6 +3,7 @@ package fooqoo.trade.stock.crawler.infrastructure.api.reposiotryimpl;
 import fooqoo.trade.stock.crawler.domain.repository.KabuPlusApiRepository;
 import fooqoo.trade.stock.crawler.infrastructure.api.config.KabuPlusConfig;
 import fooqoo.trade.stock.crawler.infrastructure.api.response.KabuPlusIndexApiResponse;
+import fooqoo.trade.stock.crawler.infrastructure.api.response.KabuPlusJsfBalanceApiResponse;
 import fooqoo.trade.stock.crawler.infrastructure.api.response.KabuPlusPriceApiResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpEntity;
@@ -58,6 +59,25 @@ public class KabuPlusApiRepositoryImpl implements KabuPlusApiRepository {
         return restTemplate
                 .exchange(url, HttpMethod.GET, new HttpEntity<String>(headers),
                         KabuPlusIndexApiResponse.class)
+                .getBody();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public KabuPlusJsfBalanceApiResponse getJsfBalance() {
+        final HttpHeaders headers = new HttpHeaders();
+
+        final String url =
+                UriComponentsBuilder.fromHttpUrl(config.getBaseUrl())
+                        .path(config.getJsfBalancePath())
+                        .build()
+                        .toString();
+
+        return restTemplate
+                .exchange(url, HttpMethod.GET, new HttpEntity<String>(headers),
+                        KabuPlusJsfBalanceApiResponse.class)
                 .getBody();
     }
 }

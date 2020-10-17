@@ -1,5 +1,6 @@
 package fooqoo.trade.stock.crawler;
 
+import fooqoo.trade.stock.crawler.domain.model.PubSubMessage;
 import java.nio.charset.StandardCharsets;
 import java.util.Base64;
 import java.util.Objects;
