@@ -11,7 +11,7 @@ import org.springframework.lang.NonNull;
  */
 @Value
 @Builder
-public class JsfBalance implements Serializable {
+public class Balance implements Serializable {
 
     /**
      * 銘柄コード.

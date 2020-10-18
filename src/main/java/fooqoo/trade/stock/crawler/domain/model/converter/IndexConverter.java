@@ -1,4 +1,4 @@
-package fooqoo.trade.stock.crawler.domain.model;
+package fooqoo.trade.stock.crawler.domain.model.converter;
 
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;

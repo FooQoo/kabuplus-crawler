@@ -1,6 +1,6 @@
 package fooqoo.trade.stock.crawler.application.job.index.processor;
 
-import fooqoo.trade.stock.crawler.application.service.IndexConverterService;
+import fooqoo.trade.stock.crawler.application.service.converter.IndexConverterService;
 import fooqoo.trade.stock.crawler.domain.model.Index;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;

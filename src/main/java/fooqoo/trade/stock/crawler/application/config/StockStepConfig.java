@@ -1,6 +1,7 @@
 package fooqoo.trade.stock.crawler.application.config;
 
 import fooqoo.trade.stock.crawler.application.job.JobListener;
+import fooqoo.trade.stock.crawler.application.job.balance.tasklet.BalanceTasklet;
 import fooqoo.trade.stock.crawler.application.job.index.tasklet.IndexTasklet;
 import fooqoo.trade.stock.crawler.application.job.macd.tasklet.MacdTasklet;
 import fooqoo.trade.stock.crawler.application.job.price.reader.PriceFileReader;
@@ -33,6 +34,7 @@ public class StockStepConfig {
     private static final String UPLOAD_STEP = "upload_gcs";
     private static final String MACD_STEP = "macd_step";
     private static final String INDEX_STEP = "index_step";
+    private static final String BALANCE_STEP = "balance_step";
 
     private static final int CHUNK_SIZE = 10000;
 
@@ -55,6 +57,8 @@ public class StockStepConfig {
     private final MacdTasklet macdTasklet;
 
     private final IndexTasklet indexTasklet;
+
+    private final BalanceTasklet balanceTasklet;
 
     /**
      * priceChunkStep.
@@ -122,6 +126,16 @@ public class StockStepConfig {
     }
 
     /**
+     * ステップのbean.
+     *
+     * @return Stepインスタンス
+     */
+    @Bean(name = BALANCE_STEP)
+    public Step balanceStep() {
+        return stepBuilderFactory.get(BALANCE_STEP).tasklet(balanceTasklet).build();
+    }
+
+    /**
      * Jobのbean.
      *
      * @param priceStep Stepインスタンス
@@ -132,12 +146,14 @@ public class StockStepConfig {
             @Qualifier(PRICE_STEP) final Step priceStep,
             @Qualifier(UPLOAD_STEP) final Step uploadStep,
             @Qualifier(MACD_STEP) final Step macdStep,
-            @Qualifier(INDEX_STEP) final Step indexStep) {
+            @Qualifier(INDEX_STEP) final Step indexStep,
+            @Qualifier(BALANCE_STEP) final Step balanceStep) {
         return jobBuilderFactory
                 .get("job")
                 .incrementer(new RunIdIncrementer())
                 .listener(jobListener)
                 .start(priceStep)
+                .next(balanceStep)
                 .next(indexStep)
                 .next(macdStep)
                 .next(uploadStep)

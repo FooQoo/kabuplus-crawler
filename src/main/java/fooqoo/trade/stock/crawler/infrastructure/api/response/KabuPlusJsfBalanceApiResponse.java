@@ -15,12 +15,12 @@ import lombok.RequiredArgsConstructor;
 public class KabuPlusJsfBalanceApiResponse implements Serializable {
 
     @JsonProperty("jsf-balance-data")
-    private final List<String[]> indexes;
+    private final List<String[]> balances;
 
     /**
      * デフォルトコンストラクタ.
      */
     public KabuPlusJsfBalanceApiResponse() {
-        this.indexes = new ArrayList<>();
+        this.balances = new ArrayList<>();
     }
 }
