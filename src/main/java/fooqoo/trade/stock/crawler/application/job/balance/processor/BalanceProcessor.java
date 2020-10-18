@@ -28,6 +28,6 @@ public class BalanceProcessor implements ItemProcessor<String[], Balance> {
      */
     @Override
     public Balance process(@NonNull final String[] balance) {
-        return balanceConverterService.getBalance(balance);
+        return this.balanceConverterService.getBalance(balance);
     }
 }

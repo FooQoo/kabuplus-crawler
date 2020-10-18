@@ -13,6 +13,8 @@ import org.springframework.lang.NonNull;
 @Builder
 public class Balance implements Serializable {
 
+    private static final long serialVersionUID = -2123918320409938781L;
+
     /**
      * 銘柄コード.
      */
