@@ -14,6 +14,8 @@ import org.springframework.lang.NonNull;
 @Builder
 public class Index implements Serializable {
 
+    private static final long serialVersionUID = -460420852752201701L;
+
     /**
      * 銘柄コード.
      */

@@ -1,7 +1,6 @@
 package fooqoo.trade.stock.crawler.infrastructure.mapper.mysql;
 
 import fooqoo.trade.stock.crawler.domain.model.Balance;
-import fooqoo.trade.stock.crawler.domain.model.Index;
 import org.apache.ibatis.annotations.Mapper;
 
 /**

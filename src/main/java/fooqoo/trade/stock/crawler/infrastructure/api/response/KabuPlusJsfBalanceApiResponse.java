@@ -14,6 +14,8 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class KabuPlusJsfBalanceApiResponse implements Serializable {
 
+    private static final long serialVersionUID = -7306585849260260402L;
+
     @JsonProperty("jsf-balance-data")
     private final List<String[]> balances;
 
@@ -21,6 +23,6 @@ public class KabuPlusJsfBalanceApiResponse implements Serializable {
      * デフォルトコンストラクタ.
      */
     public KabuPlusJsfBalanceApiResponse() {
-        this.balances = new ArrayList<>();
+        balances = new ArrayList<>();
     }
 }

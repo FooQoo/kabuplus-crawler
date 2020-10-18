@@ -13,6 +13,8 @@ import org.springframework.lang.NonNull;
 @Builder
 public class LatestDate implements Serializable {
 
+    private static final long serialVersionUID = 971323531335560353L;
+
     /**
      * 日時.
      */

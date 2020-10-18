@@ -14,6 +14,8 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class KabuPlusIndexApiResponse implements Serializable {
 
+    private static final long serialVersionUID = -2982507908416579534L;
+
     @JsonProperty("japan-all-stock-data")
     private final List<String[]> indexes;
 
@@ -21,6 +23,6 @@ public class KabuPlusIndexApiResponse implements Serializable {
      * デフォルトコンストラクタ.
      */
     public KabuPlusIndexApiResponse() {
-        this.indexes = new ArrayList<>();
+        indexes = new ArrayList<>();
     }
 }

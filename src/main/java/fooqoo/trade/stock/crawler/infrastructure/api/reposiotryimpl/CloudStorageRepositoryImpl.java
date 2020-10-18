@@ -36,7 +36,7 @@ public class CloudStorageRepositoryImpl implements CloudStorageRepository {
     public KabuPlusPriceApiResponse getCloudResource() throws IOException {
         return mapper.readValue(
                 StreamUtils
-                        .copyToString(this.gcsReadFile.getInputStream(), Charset.defaultCharset()),
+                        .copyToString(gcsReadFile.getInputStream(), Charset.defaultCharset()),
                 KabuPlusPriceApiResponse.class);
     }
 
@@ -46,8 +46,9 @@ public class CloudStorageRepositoryImpl implements CloudStorageRepository {
      * @param csv csv形式の文字列
      * @throws IOException IOException
      */
+    @Override
     public void writeCloudResource(final String csv) throws IOException {
-        try (OutputStream os = ((WritableResource) this.gcsWriteFile).getOutputStream()) {
+        try (final OutputStream os = ((WritableResource) gcsWriteFile).getOutputStream()) {
             os.write(csv.getBytes());
         }
     }

@@ -14,6 +14,8 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class KabuPlusPriceApiResponse implements Serializable {
 
+    private static final long serialVersionUID = -8972214619717307713L;
+
     @JsonProperty("japan-all-stock-prices-2")
     private final List<String[]> prices;
 
@@ -21,6 +23,6 @@ public class KabuPlusPriceApiResponse implements Serializable {
      * デフォルトコンストラクタ.
      */
     public KabuPlusPriceApiResponse() {
-        this.prices = new ArrayList<>();
+        prices = new ArrayList<>();
     }
 }

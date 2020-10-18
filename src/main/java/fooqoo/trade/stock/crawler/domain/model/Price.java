@@ -14,6 +14,8 @@ import org.springframework.lang.NonNull;
 @Builder
 public class Price implements Serializable {
 
+    private static final long serialVersionUID = 159791025520815227L;
+
     /**
      * 銘柄コード.
      */

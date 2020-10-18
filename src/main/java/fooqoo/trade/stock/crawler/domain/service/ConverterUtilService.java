@@ -20,7 +20,6 @@ public class ConverterUtilService {
     public static final String DATE_OF_PRICE_FORMAT = "yyyy/M/d";
     private final ZonedDateTime nowZonedDt = ZonedDateTime.now(ZoneId.of("Asia/Tokyo"));
 
-
     /**
      * 文字列 -> 日付変換.
      *
