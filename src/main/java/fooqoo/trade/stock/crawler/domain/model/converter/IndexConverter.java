@@ -3,6 +3,9 @@ package fooqoo.trade.stock.crawler.domain.model.converter;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 
+/**
+ * 株+の配列のindexと要素の対応.
+ */
 @RequiredArgsConstructor
 @Getter
 public enum IndexConverter {
