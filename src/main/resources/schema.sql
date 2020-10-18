@@ -48,3 +48,17 @@ CREATE TABLE IF NOT EXISTS macd (
     macd_value decimal(11, 2),
     PRIMARY KEY(code, crawled_date)
 );
+
+CREATE TABLE IF NOT EXISTS balance (
+    code int,
+    crawled_date date,
+    new_loan int,
+    loan_repayment int,
+    loan_balance int,
+    new_lending int,
+    lending_repayment int,
+    lending_balance int,
+    balance int,
+    balance_day_over_day int,
+    PRIMARY KEY(code, crawled_date)
+);

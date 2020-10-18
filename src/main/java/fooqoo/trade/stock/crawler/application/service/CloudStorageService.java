@@ -1,7 +1,7 @@
 package fooqoo.trade.stock.crawler.application.service;
 
 import fooqoo.trade.stock.crawler.domain.model.Price;
-import fooqoo.trade.stock.crawler.domain.model.PriceConverter;
+import fooqoo.trade.stock.crawler.domain.model.converter.PriceConverter;
 import fooqoo.trade.stock.crawler.domain.repository.CloudStorageRepository;
 import fooqoo.trade.stock.crawler.infrastructure.api.response.KabuPlusPriceApiResponse;
 import java.io.IOException;

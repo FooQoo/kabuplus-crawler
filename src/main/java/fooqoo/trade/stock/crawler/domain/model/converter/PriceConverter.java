@@ -1,4 +1,4 @@
-package fooqoo.trade.stock.crawler.domain.model;
+package fooqoo.trade.stock.crawler.domain.model.converter;
 
 import java.util.Arrays;
 import lombok.Getter;

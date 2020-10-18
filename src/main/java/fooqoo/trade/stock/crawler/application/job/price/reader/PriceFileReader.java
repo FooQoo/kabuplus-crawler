@@ -1,9 +1,8 @@
 package fooqoo.trade.stock.crawler.application.job.price.reader;
 
-import fooqoo.trade.stock.crawler.application.job.price.reader.PriceFieldSetMapper;
-import fooqoo.trade.stock.crawler.application.service.PriceConverterService;
+import fooqoo.trade.stock.crawler.application.service.converter.PriceConverterService;
 import fooqoo.trade.stock.crawler.domain.model.Price;
-import fooqoo.trade.stock.crawler.domain.model.PriceConverter;
+import fooqoo.trade.stock.crawler.domain.model.converter.PriceConverter;
 import java.io.IOException;
 import org.springframework.batch.core.configuration.annotation.StepScope;
 import org.springframework.batch.item.file.FlatFileItemReader;

@@ -1,6 +1,6 @@
 package fooqoo.trade.stock.crawler.application.job.price.processor;
 
-import fooqoo.trade.stock.crawler.application.service.PriceConverterService;
+import fooqoo.trade.stock.crawler.application.service.converter.PriceConverterService;
 import fooqoo.trade.stock.crawler.domain.model.Price;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;

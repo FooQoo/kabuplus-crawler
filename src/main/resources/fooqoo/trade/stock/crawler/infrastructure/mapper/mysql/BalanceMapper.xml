@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="fooqoo.trade.stock.crawler.infrastructure.mapper.mysql.BalanceMapper">
+
+    <resultMap id="Balance" type="fooqoo.trade.stock.crawler.domain.model.Balance">
+        <result property="code" column="code"/>
+        <result property="crawledDate" column="crawled_date"/>
+        <result property="newLoan" column="new_loan"/>
+        <result property="loanBalance" column="loan_balance"/>
+        <result property="newLending" column="new_lending"/>
+        <result property="lendingRepayment" column="lending_repayment"/>
+        <result property="lendingBalance" column="lending_balance"/>
+        <result property="balance" column="balance"/>
+        <result property="balanceDayOverDay" column="balance_day_over_day"/>
+    </resultMap>
+
+    <insert id="insertBalance" parameterType="fooqoo.trade.stock.crawler.domain.model.Balance">
+        <![CDATA[
+        INSERT INTO balance (
+            code,
+            crawled_date,
+            new_loan,
+            loan_repayment,
+            loan_balance,
+            new_lending,
+            lending_repayment,
+            lending_balance,
+            balance,
+            balance_day_over_day
+        ) values (
+            #{code},
+            #{crawledDate},
+            #{newLoan},
+            #{loanRepayment},
+            #{loanBalance},
+            #{newLending},
+            #{lendingRepayment},
+            #{lendingBalance},
+            #{balance},
+            #{balanceDayOverDay}
+        )
+        ]]>
+    </insert>
+
+</mapper>

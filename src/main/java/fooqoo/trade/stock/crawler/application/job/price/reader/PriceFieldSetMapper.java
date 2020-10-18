@@ -1,8 +1,8 @@
 package fooqoo.trade.stock.crawler.application.job.price.reader;
 
-import fooqoo.trade.stock.crawler.application.service.PriceConverterService;
+import fooqoo.trade.stock.crawler.application.service.converter.PriceConverterService;
 import fooqoo.trade.stock.crawler.domain.model.Price;
-import fooqoo.trade.stock.crawler.domain.model.PriceConverter;
+import fooqoo.trade.stock.crawler.domain.model.converter.PriceConverter;
 import java.util.Arrays;
 import lombok.RequiredArgsConstructor;
 import org.springframework.batch.item.file.mapping.FieldSetMapper;

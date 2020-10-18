@@ -63,7 +63,7 @@ public class KabuPlusConfig {
     }
 
     /**
-     * RestTemaplteBuilderを取得.
+     * RestTemplateBuilderを取得.
      *
      * @return RestTemplateBuilder
      */
@@ -83,7 +83,21 @@ public class KabuPlusConfig {
         return path + "japan-all-stock-prices-2/daily/japan-all-stock-prices-2.json";
     }
 
+    /**
+     * 銘柄指数のパスを取得.
+     *
+     * @return 銘柄指数のパス
+     */
     public String getIndexPath() {
         return path + "japan-all-stock-data/daily/japan-all-stock-data.json";
+    }
+
+    /**
+     * 日証金 融資・貸株残高データ.
+     *
+     * @return 日証金 融資・貸株残高データのパス
+     */
+    public String getJsfBalancePath() {
+        return path + "jsf-balance-data/daily/jsf-balance-data.json";
     }
 }

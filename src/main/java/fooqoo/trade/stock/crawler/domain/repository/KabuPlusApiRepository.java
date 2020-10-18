@@ -1,6 +1,7 @@
 package fooqoo.trade.stock.crawler.domain.repository;
 
 import fooqoo.trade.stock.crawler.infrastructure.api.response.KabuPlusIndexApiResponse;
+import fooqoo.trade.stock.crawler.infrastructure.api.response.KabuPlusJsfBalanceApiResponse;
 import fooqoo.trade.stock.crawler.infrastructure.api.response.KabuPlusPriceApiResponse;
 
 /**
@@ -21,4 +22,11 @@ public interface KabuPlusApiRepository {
      * @return 株プラスの株価指数APIレスポンス
      */
     KabuPlusIndexApiResponse getLatestIndexes();
+
+    /**
+     * 日証金 融資・貸株残高データを取得.
+     *
+     * @return 日証金 融資・貸株残高データAPIのレスポンス
+     */
+    KabuPlusJsfBalanceApiResponse getJsfBalance();
 }
