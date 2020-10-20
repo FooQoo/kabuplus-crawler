@@ -42,7 +42,7 @@ public class ConverterUtilService {
      * @return Integer型の数値
      */
     public Integer getIntegerFormat(final String number) {
-        return isNumber(number) ? (new BigDecimal(number)).intValue() : null;
+        return isNumber(number) ? (new BigDecimal(number)).intValue() : 0;
     }
 
     /**
@@ -52,7 +52,7 @@ public class ConverterUtilService {
      * @return BigDecimal型の数値
      */
     public BigDecimal getBigDecimalFormat(final String number) {
-        return isNumber(number) ? new BigDecimal(number) : null;
+        return isNumber(number) ? new BigDecimal(number) : new BigDecimal("0.00");
     }
 
     /**
