@@ -47,7 +47,7 @@ public class CloudStorageService {
                     String.join(
                             "\n", String.join(",", PriceConverter.getColumnNames()),
                             convertCsvFormat(prices)));
-        } catch (IOException e) {
+        } catch (final IOException e) {
             log.error("ファイル書き込みに失敗しました");
         }
     }

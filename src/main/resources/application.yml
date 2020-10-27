@@ -5,6 +5,8 @@ spring:
       - prod
   batch:
     initialize-schema: always
+    job:
+      enabled: false
   datasource:
     hikari:
       connection-timeout: 20000

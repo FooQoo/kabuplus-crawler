@@ -11,14 +11,18 @@ import fooqoo.trade.stock.crawler.application.job.price.tasklet.PurchaseSignedTa
 import fooqoo.trade.stock.crawler.application.job.price.writer.PriceWriter;
 import fooqoo.trade.stock.crawler.domain.model.Price;
 import lombok.RequiredArgsConstructor;
+import org.springframework.batch.core.ExitStatus;
 import org.springframework.batch.core.Job;
 import org.springframework.batch.core.Step;
 import org.springframework.batch.core.configuration.annotation.EnableBatchProcessing;
 import org.springframework.batch.core.configuration.annotation.JobBuilderFactory;
 import org.springframework.batch.core.configuration.annotation.StepBuilderFactory;
+import org.springframework.batch.core.job.builder.FlowBuilder;
+import org.springframework.batch.core.job.flow.Flow;
 import org.springframework.batch.core.launch.support.RunIdIncrementer;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
+import org.springframework.core.task.SimpleAsyncTaskExecutor;
 import org.springframework.stereotype.Component;
 
 /**
@@ -35,6 +39,9 @@ public class StockStepConfig {
     private static final String MACD_STEP = "macd_step";
     private static final String INDEX_STEP = "index_step";
     private static final String BALANCE_STEP = "balance_step";
+    private static final String PRICE_FLOW = "price_flow";
+    private static final String INDEX_FLOW = "index_flow";
+    private static final String BALANCE_FLOW = "balance_flow";
 
     private static final int CHUNK_SIZE = 10000;
 
@@ -136,27 +143,76 @@ public class StockStepConfig {
     }
 
     /**
-     * Jobのbean.
+     * 値段系フロー.
      *
-     * @param priceStep Stepインスタンス
-     * @return Jobインスタンス
+     * @param priceStep price
+     * @param macdStep  macd
+     * @return flow
      */
-    @Bean
+    @Bean(name = PRICE_FLOW)
+    public Flow priceFlow(@Qualifier(PRICE_STEP) final Step priceStep,
+                          @Qualifier(MACD_STEP) final Step macdStep) {
+        return new FlowBuilder<Flow>(PRICE_FLOW)
+                .start(priceStep).on(ExitStatus.COMPLETED.getExitCode()).to(macdStep)
+                //.from(priceStep).on(ExitStatus.FAILED.getExitCode()).fail()
+                .build();
+    }
+
+    /**
+     * 株価指数フロー.
+     *
+     * @param indexStep index
+     * @return flow
+     */
+    @Bean(name = INDEX_FLOW)
+    public Flow indexFlow(@Qualifier(INDEX_STEP) final Step indexStep) {
+        return new FlowBuilder<Flow>(INDEX_FLOW)
+                .from(indexStep)//.on(ExitStatus.FAILED.getExitCode()).fail()
+                .end();
+    }
+
+    /**
+     * 貸借フロー.
+     *
+     * @param balanceStep balance
+     * @return flow
+     */
+    @Bean(name = BALANCE_FLOW)
+    public Flow balanceFlow(@Qualifier(BALANCE_STEP) final Step balanceStep) {
+        return new FlowBuilder<Flow>(BALANCE_FLOW)
+                .from(balanceStep)//.on(ExitStatus.FAILED.getExitCode()).fail()
+                .end();
+    }
+
+    /**
+     * Job.
+     *
+     * @param priceFlow   price
+     * @param indexFlow   index
+     * @param balanceFlow balance
+     * @param uploadStep  upload
+     * @return job
+     */
+    @Bean(name = "job")
     public Job job(
-            @Qualifier(PRICE_STEP) final Step priceStep,
-            @Qualifier(UPLOAD_STEP) final Step uploadStep,
-            @Qualifier(MACD_STEP) final Step macdStep,
-            @Qualifier(INDEX_STEP) final Step indexStep,
-            @Qualifier(BALANCE_STEP) final Step balanceStep) {
+            @Qualifier(PRICE_FLOW) final Flow priceFlow,
+            @Qualifier(INDEX_FLOW) final Flow indexFlow,
+            @Qualifier(BALANCE_FLOW) final Flow balanceFlow,
+            @Qualifier(UPLOAD_STEP) final Step uploadStep
+    ) {
+
+        final Flow inputFlow = new FlowBuilder<Flow>("input")
+                .split(new SimpleAsyncTaskExecutor())
+                .add(priceFlow, indexFlow, balanceFlow)
+                .build();
+
         return jobBuilderFactory
                 .get("job")
                 .incrementer(new RunIdIncrementer())
                 .listener(jobListener)
-                .start(priceStep)
-                .next(balanceStep)
-                .next(indexStep)
-                .next(macdStep)
+                .start(inputFlow)
                 .next(uploadStep)
+                .end()
                 .build();
     }
 }
