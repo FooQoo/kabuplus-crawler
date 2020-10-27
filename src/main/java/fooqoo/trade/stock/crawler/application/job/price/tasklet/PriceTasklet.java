@@ -10,6 +10,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.batch.core.ExitStatus;
 import org.springframework.batch.core.StepContribution;
 import org.springframework.batch.core.scope.context.ChunkContext;
 import org.springframework.batch.core.step.tasklet.Tasklet;
@@ -33,13 +34,13 @@ public class PriceTasklet implements Tasklet {
     /**
      * タスクレットの実行メソッド.
      *
-     * @param stepContribution StepContributionインスタンス
-     * @param chunkContext     ChunkContextインスタンス
+     * @param contribution StepContributionインスタンス
+     * @param chunkContext ChunkContextインスタンス
      * @return 実行ステータス
      */
     @Override
     public RepeatStatus execute(
-            @NonNull final StepContribution stepContribution,
+            @NonNull final StepContribution contribution,
             @NonNull final ChunkContext chunkContext) {
 
         final KabuPlusPriceApiResponse response = kabuPlusApiRepository.getLatestPrices();
@@ -52,6 +53,7 @@ public class PriceTasklet implements Tasklet {
             writer.write(sectorFilterService.filterSectorPrice(priceList));
         } catch (final Exception e) {
             log.error("書き込み処理に失敗しました - {}", e.getMessage());
+            contribution.setExitStatus(ExitStatus.FAILED);
         }
 
         log.info("complete insert chunk");
