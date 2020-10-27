@@ -154,7 +154,7 @@ public class StockStepConfig {
                           @Qualifier(MACD_STEP) final Step macdStep) {
         return new FlowBuilder<Flow>(PRICE_FLOW)
                 .start(priceStep).on(ExitStatus.COMPLETED.getExitCode()).to(macdStep)
-                .from(priceStep).on(ExitStatus.FAILED.getExitCode()).fail()
+                //.from(priceStep).on(ExitStatus.FAILED.getExitCode()).fail()
                 .build();
     }
 
@@ -167,7 +167,7 @@ public class StockStepConfig {
     @Bean(name = INDEX_FLOW)
     public Flow indexFlow(@Qualifier(INDEX_STEP) final Step indexStep) {
         return new FlowBuilder<Flow>(INDEX_FLOW)
-                .from(indexStep).on(ExitStatus.FAILED.getExitCode()).fail()
+                .from(indexStep)//.on(ExitStatus.FAILED.getExitCode()).fail()
                 .end();
     }
 
@@ -180,7 +180,7 @@ public class StockStepConfig {
     @Bean(name = BALANCE_FLOW)
     public Flow balanceFlow(@Qualifier(BALANCE_STEP) final Step balanceStep) {
         return new FlowBuilder<Flow>(BALANCE_FLOW)
-                .from(balanceStep).on(ExitStatus.FAILED.getExitCode()).fail()
+                .from(balanceStep)//.on(ExitStatus.FAILED.getExitCode()).fail()
                 .end();
     }
 
