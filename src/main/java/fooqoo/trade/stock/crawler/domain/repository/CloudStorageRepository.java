@@ -1,17 +1,26 @@
 package fooqoo.trade.stock.crawler.domain.repository;
 
-import fooqoo.trade.stock.crawler.infrastructure.api.response.KabuPlusApiResponse;
-
+import fooqoo.trade.stock.crawler.infrastructure.api.response.KabuPlusPriceApiResponse;
 import java.io.IOException;
 
-/** CloudStorageRepository */
+/**
+ * CloudStorageRepository.
+ */
 public interface CloudStorageRepository {
 
-  /**
-   * GCSからJSON形式のデータ取得
-   *
-   * @return json形式のデータ
-   * @throws IOException IOException
-   */
-  public KabuPlusApiResponse getCloudResource() throws IOException;
+    /**
+     * GCSからJSON形式のデータ取得.
+     *
+     * @return json形式のデータ
+     * @throws IOException IOException
+     */
+    KabuPlusPriceApiResponse getCloudResource() throws IOException;
+
+    /**
+     * GCSにファイルを書き込む.
+     *
+     * @param csv csv形式の文字列
+     * @throws IOException IOException
+     */
+    void writeCloudResource(final String csv) throws IOException;
 }

@@ -33,3 +33,5 @@ node_modules
 ## gcp credential
 credentials.json
 env.yaml
+*.pem
+*.spf

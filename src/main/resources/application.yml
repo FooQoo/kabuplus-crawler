@@ -5,6 +5,8 @@ spring:
       - prod
   batch:
     initialize-schema: always
+    job:
+      enabled: false
   datasource:
     hikari:
       connection-timeout: 20000
@@ -13,7 +15,7 @@ spring:
       idle-timeout: 20000
       max-lifetime: 60000
 
-gcs-resource-test-bucket: ${GCS_BACKET}
+gcs-resource-bucket: ${GCS_BACKET}
 
 logging.level:
   fooqoo.trade.stock.repository: debug

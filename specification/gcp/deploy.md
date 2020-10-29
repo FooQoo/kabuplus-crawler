@@ -15,7 +15,7 @@ $ gcloud functions deploy stock-crawler \
   --runtime=java11 \
   --trigger-topic=stock \
   --source=target/ \
-  --memory=512MB \
+  --memory=1024MB \
   --env-vars-file=env.yaml \
   --vpc-connector=function2sql \
   --timeout=300

@@ -43,4 +43,13 @@ jobs:
       - name: Deploy To Google Functions
         run: |
           echo $FUNCTION_ENV | base64 -d > env.yaml
-          gcloud functions deploy stock-crawler --project $GCP_SA_PROJECT_ID --quiet --entry-point=org.springframework.cloud.function.adapter.gcp.GcfJarLauncher --trigger-topic=stock --env-vars-file=env.yaml --source=target --runtime=java11 --memory=512MB --vpc-connector=function2sql --timeout=300
+          gcloud functions deploy stock-crawler \
+            --project $GCP_SA_PROJECT_ID \
+            --quiet \
+            --entry-point=org.springframework.cloud.function.adapter.gcp.GcfJarLauncher \
+            --trigger-topic=stock --env-vars-file=env.yaml \
+            --source=target \
+            --runtime=java11 \
+            --memory=1024MB \
+            --vpc-connector=function2sql \
+            --timeout=300
