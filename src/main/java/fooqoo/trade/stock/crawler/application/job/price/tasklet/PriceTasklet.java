@@ -2,7 +2,6 @@ package fooqoo.trade.stock.crawler.application.job.price.tasklet;
 
 import fooqoo.trade.stock.crawler.application.job.price.processor.PriceProcessor;
 import fooqoo.trade.stock.crawler.application.job.price.writer.PriceWriter;
-import fooqoo.trade.stock.crawler.application.service.SectorFilterService;
 import fooqoo.trade.stock.crawler.domain.model.Price;
 import fooqoo.trade.stock.crawler.domain.repository.KabuPlusApiRepository;
 import fooqoo.trade.stock.crawler.infrastructure.api.response.KabuPlusPriceApiResponse;
@@ -28,7 +27,6 @@ public class PriceTasklet implements Tasklet {
     private final KabuPlusApiRepository kabuPlusApiRepository;
     private final PriceProcessor processor;
     private final PriceWriter writer;
-    private final SectorFilterService sectorFilterService;
 
     /**
      * タスクレットの実行メソッド.
@@ -47,9 +45,8 @@ public class PriceTasklet implements Tasklet {
         final List<Price> priceList =
                 response.getPrices().stream().map(processor::process).collect(Collectors.toList());
 
-        // フィルタリングされた銘柄を保存
         try {
-            writer.write(sectorFilterService.filterSectorPrice(priceList));
+            writer.write(priceList);
         } catch (final Exception e) {
             log.error("書き込み処理に失敗しました - {}", e.getMessage());
             //contribution.setExitStatus(ExitStatus.FAILED);
