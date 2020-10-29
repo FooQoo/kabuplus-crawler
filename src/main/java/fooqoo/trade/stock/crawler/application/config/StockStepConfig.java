@@ -11,7 +11,6 @@ import fooqoo.trade.stock.crawler.application.job.price.tasklet.PurchaseSignedTa
 import fooqoo.trade.stock.crawler.application.job.price.writer.PriceWriter;
 import fooqoo.trade.stock.crawler.domain.model.Price;
 import lombok.RequiredArgsConstructor;
-import org.springframework.batch.core.ExitStatus;
 import org.springframework.batch.core.Job;
 import org.springframework.batch.core.Step;
 import org.springframework.batch.core.configuration.annotation.EnableBatchProcessing;
@@ -153,7 +152,9 @@ public class StockStepConfig {
     public Flow priceFlow(@Qualifier(PRICE_STEP) final Step priceStep,
                           @Qualifier(MACD_STEP) final Step macdStep) {
         return new FlowBuilder<Flow>(PRICE_FLOW)
-                .start(priceStep).on(ExitStatus.COMPLETED.getExitCode()).to(macdStep)
+                .start(priceStep)
+                .next(macdStep)
+                //.on(ExitStatus.COMPLETED.getExitCode()).to(macdStep)
                 //.from(priceStep).on(ExitStatus.FAILED.getExitCode()).fail()
                 .build();
     }
