@@ -4,7 +4,6 @@ import fooqoo.trade.stock.crawler.application.service.MacdService;
 import java.time.LocalDate;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.batch.core.ExitStatus;
 import org.springframework.batch.core.StepContribution;
 import org.springframework.batch.core.scope.context.ChunkContext;
 import org.springframework.batch.core.step.tasklet.Tasklet;
@@ -42,7 +41,7 @@ public class MacdTasklet implements Tasklet {
             macdService.insertMacd(today, latestDate);
         } catch (final Exception e) {
             log.error("書き込み処理に失敗しました - {}", e.getMessage());
-            contribution.setExitStatus(ExitStatus.FAILED);
+            //contribution.setExitStatus(ExitStatus.FAILED);
         }
 
         log.info("complete insert chunk");
