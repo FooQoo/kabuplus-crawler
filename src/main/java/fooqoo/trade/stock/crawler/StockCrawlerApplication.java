@@ -3,13 +3,13 @@ package fooqoo.trade.stock.crawler;
 import fooqoo.trade.stock.crawler.domain.model.PubSubMessage;
 import java.nio.charset.StandardCharsets;
 import java.util.Base64;
+import java.util.Date;
 import java.util.Objects;
-import java.util.Properties;
 import java.util.function.Consumer;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.batch.core.Job;
 import org.springframework.batch.core.JobParameters;
-import org.springframework.batch.core.converter.DefaultJobParametersConverter;
+import org.springframework.batch.core.JobParametersBuilder;
 import org.springframework.batch.core.launch.JobLauncher;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.WebApplicationType;
@@ -31,17 +31,15 @@ public class StockCrawlerApplication {
      * @param args args
      */
     public static void main(final String[] args) throws Exception {
-        if (args.length > 0) {
+        if (args.length >= 1) {
             final SpringApplication application =
                     new SpringApplication(StockCrawlerApplication.class);
 
             application.setWebApplicationType(WebApplicationType.NONE);
             final ConfigurableApplicationContext context = application.run(args);
             final JobLauncher jobLauncher = context.getBean("jobLauncher", JobLauncher.class);
-            final JobParameters jobParameters =
-                    new DefaultJobParametersConverter().getJobParameters(new Properties());
             final Job job = context.getBean("job", Job.class);
-            jobLauncher.run(job, jobParameters);
+            jobLauncher.run(job, createJobParams());
         } else {
             throw new Exception("Need at least one argument jobName.");
         }
@@ -80,5 +78,14 @@ public class StockCrawlerApplication {
             }
         }
         return StringUtils.EMPTY;
+    }
+
+    /**
+     * jobパラメータを取得.
+     *
+     * @return job
+     */
+    private static JobParameters createJobParams() {
+        return new JobParametersBuilder().addDate("date", new Date()).toJobParameters();
     }
 }
